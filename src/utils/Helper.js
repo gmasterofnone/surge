@@ -34,16 +34,18 @@ const addUsers = async news => {
   const response = await fetchRequest(url)
 
   return response.results.map(user => {
-    let fName, lName
+    let fName, lName;
     fName = user.name.first[0].toUpperCase() + user.name.first.substr(1)
     lName = user.name.last[0].toUpperCase() + user.name.last.substr(1)
     return {
       name: `${fName} ${lName}`,
-      id: user.id.value,
-      avatar: user.picture.thumbnail,
+      id: uuidv4(),
+      avatar: user.picture.large,
     }
   })
 }
+
+
 
 
 
