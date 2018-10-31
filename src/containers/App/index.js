@@ -2,7 +2,15 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import { buildEvents } from '../../utils/Helper'
+
 class App extends Component {
+
+  async componentDidMount() {
+    const topics = ['activists', 'immigration', 'lgbqia']
+    const result = await buildEvents(null, topics)
+    console.log(result)
+  }
   render() {
     return (
       <div className="App">
