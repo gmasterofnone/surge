@@ -3,6 +3,10 @@ import { fetchRequest } from './API.js'
 
 let uuidv4 = require("uuid/v4");
 
+export const checkUser = () => {
+  return JSON.parse(localStorage.getItem('user'))
+}
+
 export const buildNews =  async (topic) => {
   const result = await fetchNews(topic)
   return result
