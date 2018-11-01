@@ -2,16 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 
-import { getNews } from '../../actions/thunks/getNews'
+import { getTopic } from '../../actions/thunks/getTopic'
 
 import logo from './logo.svg';
 import './App.css';
 
 
 class App extends Component {
+  
+  componentDidMount() {
+    
+    this.props.getTopic('activism');
+  }
 
-  async componentDidMount() {
-    this.props.getNews('activism');
+  addTopic = () => {
+    this.props.getTopic('metoo')
   }
 
   render() {
@@ -30,6 +35,7 @@ class App extends Component {
           >
             Learn React
           </a>
+          <button onClick={this.addTopic}></button>
         </header>
       </div>
     );
@@ -43,7 +49,7 @@ export const mapStateToProps = (state) => ({
 })
 
 export const mapDispatchToProps = (dispatch) => ({
-  getNews: (topic) => dispatch(getNews(topic))
+  getTopic: (topic) => dispatch(getTopic(topic))
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

@@ -1,7 +1,7 @@
 import { buildNews } from '../../utils/Helper'
-import { isLoading, addTopic, hasErrored } from '../../actions'
+import { isLoading, addTopic, hasErrored } from '..'
 
-export const getNews = topic => {
+export const getTopic = topic => {
   return async dispatch => {
     dispatch(isLoading(true))
     try {
