@@ -1,3 +1,18 @@
+export const createUser = avatar => ({
+  type: 'ADD_USER',
+  avatar
+})
+
+export const loginUser = user => ({
+  type: 'LOGIN_USER',
+  user
+})
+
+export const deleteUser = () => ({
+  type: 'DELETE_USER'
+})
+
+
 export const isLoading = status => ({
   type: 'IS_LOADING',
   status
