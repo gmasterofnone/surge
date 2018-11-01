@@ -5,7 +5,11 @@
   "dependencies": {
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
+    "react-redux": "^5.1.0",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.0",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
     "uuid": "^3.3.2"
   },
   "scripts": {
@@ -22,5 +26,10 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
+    "enzyme-to-json": "^3.3.4"
+  }
 }

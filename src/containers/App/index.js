@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom';
+
+import { getTopic } from '../../actions/thunks/getTopic'
+
 import logo from './logo.svg';
 import './App.css';
 
-import { buildEvents } from '../../utils/Helper'
 
 class App extends Component {
-
-  async componentDidMount() {
-    const topics = ['activists', 'immigration', 'lgbqia']
-    const result = await buildEvents(null, topics)
-    console.log(result)
+  
+  componentDidMount() {
+    
+    this.props.getTopic('activism');
   }
+
+  addTopic = () => {
+    this.props.getTopic('metoo')
+  }
+
   render() {
     return (
       <div className="App">
@@ -27,10 +35,21 @@ class App extends Component {
           >
             Learn React
           </a>
+          <button onClick={this.addTopic}></button>
         </header>
       </div>
     );
   }
 }
 
-export default App;
+export const mapStateToProps = (state) => ({
+  isLoading: state.isLoading,
+  hasErrored: state.hasErrored,
+  content: state.content
+})
+
+export const mapDispatchToProps = (dispatch) => ({
+  getTopic: (topic) => dispatch(getTopic(topic))
+})
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
