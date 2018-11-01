@@ -1,5 +1,3 @@
 export const loading = (state = false, action) => {
-  switch(action.type) {
-    case ''
-  }
+  action.type === 'IS_LOADING' ? action.type : state
 }
