@@ -3,9 +3,10 @@ export const isLoading = status => ({
   status
 })
 
-export const addTopic = topic => ({
+export const addTopic = (topic, articles) => ({
   type: 'ADD_TOPIC',
-  topic
+  topic,
+  articles
 })
 
 export const hasErrored = status => ({

@@ -4,18 +4,21 @@ import { fetchRequest } from './API.js'
 let uuidv4 = require("uuid/v4");
 
 export const buildNews =  async (topic) => {
-  return await fetchNews(topic)
+  const result = await fetchNews(topic)
+  console.log(result)
+  return result
 }
 
 export const fetchNews = async topic => {
   const url = `https://newsapi.org/v2/everything?q=${topic}&sortBy=popularity&apiKey=${newsKey}`
   const response =  await fetchRequest(url)
+  console.log(response)
   return response.articles.map(article => ({
     id: uuidv4(),
     source: article.source.name,
     author: article.author,
     title: article.title,
-    body: article.content.slice(0, -14),
+    body: article.description.slice(0, -14),
     link: article.url,
     image: article.urlToImage,
     date: article.publishedAt

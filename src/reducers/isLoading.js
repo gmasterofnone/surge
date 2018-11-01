@@ -1,3 +1,3 @@
-export const loading = (state = false, action) => {
-  action.type === 'IS_LOADING' ? action.type : state
+export const isLoading = (state = false, action) => {
+  return action.type === 'IS_LOADING' ? action.status : state
 }

@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { Route, withRouter } from 'react-router-dom';
+
+import { getNews } from '../../actions/thunks/getNews'
+
 import logo from './logo.svg';
 import './App.css';
 
 import { buildNews } from '../../utils/Helper'
 
+
 class App extends Component {
 
-  // async componentDidMount() {
-   
-  //   const result = await buildNews('activist')
-  //   console.log(result)
-  // }
+  async componentDidMount() {
+    this.props.getNews('activism');
+  }
+  
   render() {
     return (
       <div className="App">
@@ -33,4 +38,14 @@ class App extends Component {
   }
 }
 
-export default App;
+export const mapStateToProps = (state) => ({
+  isLoading: state.isLoading,
+  hasErrored: state.hasErrored,
+  content: state.content
+})
+
+export const mapDispatchToProps = (dispatch) => ({
+  getNews: (topic) => dispatch(getNews(topic))
+})
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
