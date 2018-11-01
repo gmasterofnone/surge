@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+
+import logo from '../../assets/logo.svg';
+import { avatar } from '../../assets/'
+
+import './Nav.css'
+
 
 
 export class Nav extends Component {
@@ -12,8 +19,27 @@ export class Nav extends Component {
   }
 
   render() {
+   const { user } = this.props;
+  
     return(
-      <div>hey</div>
+      <header>
+        <div>
+          <Link to='/'>
+            <img 
+              className='avatar'
+              src={avatar[user.avatar]} 
+              alt='avatar' 
+            />
+          </Link>
+          <img 
+            className='logo'
+            src={logo} 
+            alt='logo' 
+          />
+        </div>
+       
+
+      </header>
     )
   }
 }
@@ -21,13 +47,12 @@ export class Nav extends Component {
 
 
 export const mapStateToProps = (state) => ({
-  isLoading: state.isLoading,
-  hasErrored: state.hasErrored,
-  content: state.content
+  content: state.content,
+  user: state.user
 })
 
-export const mapDispatchToProps = (dispatch) => ({
-  // getTopic: (topic) => dispatch(getTopic(topic))
-})
+// export const mapDispatchToProps = (dispatch) => ({
+//   // getTopic: (topic) => dispatch(getTopic(topic))
+// })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Nav)
+export default connect(mapStateToProps)(Nav)

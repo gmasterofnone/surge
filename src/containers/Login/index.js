@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { avatar } from '../../assets/'
 import { createUser } from '../../actions/index';
 import logo from '../../assets/logo.svg';
@@ -11,14 +12,16 @@ export const login = ( { createUser } ) => {
   let uuidv4 = require("uuid/v4");
   const avatars = Object.keys(avatar).map(icon => (
     <div className='avatar-container' key={uuidv4()}>
-      <img 
-        className='avatar'
-        src={avatar[icon]} 
-        alt='avatar' 
-        value={icon}
-        onClick={() => createUser(icon)}
-        key={uuidv4()}
-      />
+      <Link to='/'>
+        <img 
+          className='login-avatar'
+          src={avatar[icon]} 
+          alt='avatar' 
+          value={icon}
+          onClick={() => createUser(icon)}
+          key={uuidv4()}
+        />
+      </Link>
       <img 
         className='login-logo'
         src={logo} 

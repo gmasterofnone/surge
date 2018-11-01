@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-// import { Route, withRouter } from 'react-router-dom';
+import { Route, withRouter, Switch } from 'react-router-dom';
 import { getTopic } from '../../actions/thunks/getTopic';
 import { loginUser } from '../../actions/index'
 import { checkUser } from '../../utils/Helper'
 
-import { Nav } from '../Nav'
+import Nav from '../Nav'
 import Login from '../Login';
 
 
@@ -16,18 +16,20 @@ class App extends Component {
   
   componentDidMount() {
     const user = checkUser()
-    if (user) {this.props.loginUser(user)}
+
+    user 
+      ? this.props.loginUser(user)
+      : this.props.history.push('/login')
   }
 
   render() {
-    const { user } = this.props;
-    if (!user.avatar) {
-      return(<Login />)
-    }
 
     return (
       <div className="App">
-        <Nav />
+        <Switch>
+          <Route exact path='/login' render={() => <Login />}/>
+          <Route path='/' render={() => <Nav />}/>
+        </Switch>
       </div>
     );
   }
