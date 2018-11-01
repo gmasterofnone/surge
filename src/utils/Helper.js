@@ -5,14 +5,12 @@ let uuidv4 = require("uuid/v4");
 
 export const buildNews =  async (topic) => {
   const result = await fetchNews(topic)
-  console.log(result)
   return result
 }
 
 export const fetchNews = async topic => {
   const url = `https://newsapi.org/v2/everything?q=${topic}&sortBy=popularity&apiKey=${newsKey}`
   const response =  await fetchRequest(url)
-  console.log(response)
   return response.articles.map(article => ({
     id: uuidv4(),
     source: article.source.name,

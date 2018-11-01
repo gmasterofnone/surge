@@ -5,9 +5,7 @@ export const getNews = topic => {
   return async dispatch => {
     dispatch(isLoading(true))
     try {
-      
       const response = await buildNews(topic)
-      console.log(topic)
       dispatch(addTopic(topic, response))
       dispatch(isLoading(false))
     } catch(error) {

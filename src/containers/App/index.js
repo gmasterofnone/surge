@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Route, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import { getNews } from '../../actions/thunks/getNews'
 
 import logo from './logo.svg';
 import './App.css';
-
-import { buildNews } from '../../utils/Helper'
 
 
 class App extends Component {
@@ -15,7 +13,7 @@ class App extends Component {
   async componentDidMount() {
     this.props.getNews('activism');
   }
-  
+
   render() {
     return (
       <div className="App">
