@@ -1,12 +1,14 @@
-import { buildNews } from '../utils/Helper'
+export const isLoading = status => ({
+  type: 'IS_LOADING',
+  status
+})
 
-export const getNews = topic => {
-  return async dispatch => {
-    dispatch(isLoading(true))
-    try {
-      const response = await buildNews(topic)
-      dispatch(addTopic(response))
-      dispatch(isLoading(false))
-    }
-  }
-}
+export const addTopic = topic => ({
+  type: 'ADD_TOPIC',
+  topic
+})
+
+export const hasErrored = status => ({
+  type: 'HAS_ERRORED',
+  status
+})
