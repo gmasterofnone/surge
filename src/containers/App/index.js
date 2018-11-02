@@ -16,7 +16,7 @@ class App extends Component {
   
   componentDidMount() {
     const user = checkUser()
-
+    
     user 
       ? this.props.loginUser(user)
       : this.props.history.push('/login')

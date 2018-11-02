@@ -18,13 +18,18 @@ export const isLoading = status => ({
   status
 })
 
+export const hasErrored = status => ({
+  type: 'HAS_ERRORED',
+  status
+})
+
 export const addTopic = (topic, articles) => ({
   type: 'ADD_TOPIC',
   topic,
   articles
 })
 
-export const hasErrored = status => ({
-  type: 'HAS_ERRORED',
-  status
+export const removeTopic = (topic) => ({
+  type: 'REMOVE_TOPIC',
+  topic,
 })

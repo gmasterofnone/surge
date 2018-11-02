@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { getTopic } from '../../actions/thunks/getTopic';
+import { removeTopic } from '../../actions'
 
 import logo from '../../assets/logo.svg';
 import add from '../../assets/add.svg';
@@ -10,7 +12,6 @@ import { avatar } from '../../assets/'
 import { color } from '../../assets/color'
 
 import './Nav.css'
-
 
 
 export class Nav extends Component {
@@ -42,13 +43,15 @@ export class Nav extends Component {
     const { search, topics } = this.state;
     const randomColor = color[Math.round(Math.random() * 4 )];
     this.setState( { topics: [...topics, {search, randomColor}] } );
-    this.setState( { search: '', addTopic: !this.state.addTopic } )
+    this.props.getTopic(search)
+    this.setState( { search: '', addTopic: !this.state.addTopic } );
   }
 
   removeTopic = (name) => {
     const topics = this.state.topics.filter(topic => 
       (topic.search !== name))
    this.setState( { topics });
+   this.props.removeTopic(name)
   }
   
 
@@ -56,7 +59,7 @@ export class Nav extends Component {
    const { user } = this.props;
    const { search, topics, addTopic } = this.state;
    let uuidv4 = require("uuid/v4");
-   
+
    const displayTopics = topics.map(topic => (
       <span className={`${topic} search-topics`}
         key={uuidv4()}
@@ -110,8 +113,9 @@ export const mapStateToProps = (state) => ({
   user: state.user
 })
 
-// export const mapDispatchToProps = (dispatch) => ({
-//   // getTopic: (topic) => dispatch(getTopic(topic))
-// })
+export const mapDispatchToProps = (dispatch) => ({
+  getTopic: (topic) => dispatch(getTopic(topic)),
+  removeTopic: (topic) => dispatch(removeTopic(topic))
+})
 
-export default connect(mapStateToProps)(Nav)
+export default connect(mapStateToProps, mapDispatchToProps)(Nav)
