@@ -1,15 +1,59 @@
 header {
+  display: flex;
   margin: 30px 0 0 50px;
+  align-items: flex-end;
+}
+
+.avatar-logo {
+  margin-right: 10px;
 }
 
 .avatar {
   cursor: pointer;
   height: 80px;
-  margin-right: 1px;
+  margin-right: 3px;
 }
 
 .logo {
   height: 70px;
   position: relative;
   top: 0px;
+}
+
+.add-btn {
+  height: 25px;
+  margin-bottom: 18px;
+}
+
+.topic-form {
+  margin: 0 0 22px 5px;
+  height: 20px;
+}
+
+.search, .search-topics {
+  font-size: 1.25rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+}
+
+.search {
+  border: none;
+  caret-color: #41ead4;
+  font-weight: 600;
+}
+
+.search:focus {
+  outline: none;
+}
+
+.search-topics {
+  font-style: italic;
+  padding: 0 8px 0 0;
+  margin-bottom: 18px;
+}
+
+.search-topics:hover {
+  cursor: pointer;
+  text-decoration: line-through;
+  filter: contrast(.25)
 }

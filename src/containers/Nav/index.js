@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import logo from '../../assets/logo.svg';
+import add from '../../assets/add.svg';
 import { avatar } from '../../assets/'
+import { color } from '../../assets/color'
 
 import './Nav.css'
 
@@ -13,17 +15,52 @@ export class Nav extends Component {
   constructor() {
     super()
     this.state = {
-      name: '',
-      avatar: '',
+      addTopic: false,
+      search: '',
+      topics: [],
+      avatar: ''
     }
   }
 
+  toggleAdd = () => {
+    this.setState( {addTopic: !this.state.addTopic} );
+  }
+
+  handleChange = (event) => {
+    const { value } =  event.target;
+    this.setState( { search: value } );
+  }
+
+  addTopic = (event) => {
+    event.preventDefault();
+    const { search, topics } = this.state;
+    const randomColor = color[Math.round(Math.random() * 4 )];
+    this.setState( { topics: [...topics, {search, randomColor}] } );
+    this.setState( { search: '', addTopic: !this.state.addTopic } )
+  }
+
+  removeTopic = (name) => {
+    const topics = this.state.topics.filter(topic => 
+      (topic.search !== name))
+   this.setState( { topics });
+  }
+  
+
   render() {
    const { user } = this.props;
+   const { search, topics, addTopic } = this.state;
+   let uuidv4 = require("uuid/v4");
+   const displayTopics = topics.map(topic => (
+      <span className={`${topic} search-topics`}
+        key={uuidv4()}
+        style={{color: `${topic.randomColor}`}}
+        onClick={() => this.removeTopic(topic.search)}
+      >{topic.search.toUpperCase()},</span> 
+   ))
   
     return(
       <header>
-        <div>
+        <div className='avatar-logo'>
           <Link to='/'>
             <img 
               className='avatar'
@@ -37,8 +74,28 @@ export class Nav extends Component {
             alt='logo' 
           />
         </div>
-       
-
+        {displayTopics}
+        {
+          addTopic &&
+          <form className='topic-form' 
+            onSubmit={this.addTopic}
+          >
+            <input autoFocus className='search'
+              value={search}
+              style={{width: `${(search.length * 11.2) + 15}px`}}
+              onChange={this.handleChange}
+            />
+          </form>
+        }
+        {
+          !addTopic &&
+          <img 
+            className='add-btn'
+            src={add} 
+            alt='add button'
+            onClick={this.toggleAdd} 
+          />
+        }
       </header>
     )
   }
