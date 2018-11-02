@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 
 import logo from '../../assets/logo.svg';
 import add from '../../assets/add.svg';
+import close from '../../assets/close.svg';
+
 import { avatar } from '../../assets/'
 import { color } from '../../assets/color'
 
@@ -23,7 +25,11 @@ export class Nav extends Component {
   }
 
   toggleAdd = () => {
-    this.setState( {addTopic: !this.state.addTopic} );
+    this.setState( {
+      addTopic: !this.state.addTopic,
+      search : ''
+      } 
+    );
   }
 
   handleChange = (event) => {
@@ -50,6 +56,7 @@ export class Nav extends Component {
    const { user } = this.props;
    const { search, topics, addTopic } = this.state;
    let uuidv4 = require("uuid/v4");
+   
    const displayTopics = topics.map(topic => (
       <span className={`${topic} search-topics`}
         key={uuidv4()}
@@ -87,21 +94,16 @@ export class Nav extends Component {
             />
           </form>
         }
-        {
-          !addTopic &&
           <img 
-            className='add-btn'
-            src={add} 
+            className='search-btn'
+            src={addTopic ? close : add} 
             alt='add button'
             onClick={this.toggleAdd} 
           />
-        }
       </header>
     )
   }
 }
-
-
 
 export const mapStateToProps = (state) => ({
   content: state.content,

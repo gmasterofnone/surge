@@ -20,13 +20,14 @@ header {
   top: 0px;
 }
 
-.add-btn {
+.search-btn {
   height: 25px;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .topic-form {
-  margin: 0 0 22px 5px;
+  margin: 0 2px 24px 5px;
   height: 20px;
 }
 
@@ -38,7 +39,7 @@ header {
 
 .search {
   border: none;
-  caret-color: #41ead4;
+  caret-color: #ff0022;
   font-weight: 600;
 }
 
@@ -49,7 +50,7 @@ header {
 .search-topics {
   font-style: italic;
   padding: 0 8px 0 0;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
 .search-topics:hover {
