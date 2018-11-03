@@ -100,12 +100,11 @@ describe('user Reducer', () => {
     expect(result).toEqual(expected)
   })
 
-  it('should add a user', () => {
-    const user = {avatar: 'one', topics: ['immigration']};
-    const expected = {avatar: 'one', topics: ['immigration']}
-    const result = user(undefined, {})
+  it('should login a user', () => {
+    const userInfo = {avatar: 'one', topics: ['immigration']};
+    const result = user(undefined, actions.loginUser(userInfo))
     
-    expect(result).toEqual(expected)
+    expect(result).toEqual(userInfo)
   })
 
   it('should delete a user', () => {

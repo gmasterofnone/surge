@@ -7,6 +7,8 @@ import { checkUser } from '../../utils/Helper'
 
 import Nav from '../Nav'
 import Login from '../Login';
+import Spread from '../Spread';
+
 
 import './App.css';
 
@@ -29,6 +31,7 @@ class App extends Component {
           <Route exact path='/login' render={() => <Login />}/>
           <Route path='/' render={() => <Nav />}/>
         </Switch>
+        <Spread />
       </div>
     );
   }

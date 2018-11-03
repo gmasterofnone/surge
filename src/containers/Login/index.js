@@ -35,31 +35,9 @@ export const login = ( { createUser } ) => {
 
   return(
     <div className='login'>
-      {/* <img className='avatar' 
-        src={avatar.one} 
-        alt='avatar' 
-        value='one' 
-      />
-      <img className='avatar' 
-        src={avatar.two} 
-        alt='avatar' 
-        value='one' 
-      />
-      <img className='avatar' 
-        src={avatar.three} 
-        alt='avatar' 
-        value='one' 
-      />
-      <img className='avatar' 
-        src={avatar.four} 
-        alt='avatar' 
-        value='one' 
-      /> */}
       {avatars}
-     
     </div>
   )
-
 }
 
 export const mapDispatchToProps = (dispatch) => ({
