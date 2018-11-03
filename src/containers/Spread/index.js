@@ -1,36 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
+import TopicContainer from '../../components/TopicContainer'
+
+
+
 import './Spread.css'
 
 export const Spread = ( { content } ) => {
   let uuidv4 = require("uuid/v4");
-  // const avatars = Object.keys(avatar).map(icon => (
-  //   <div className='avatar-container' key={uuidv4()}>
-  //     <Link to='/'>
-  //       <img 
-  //         className='Spread-avatar'
-  //         src={avatar[icon]} 
-  //         alt='avatar' 
-  //         value={icon}
-  //         onClick={() => createUser(icon)}
-  //         key={uuidv4()}
-  //       />
-  //     </Link>
-  //     <img 
-  //       className='Spread-logo'
-  //       src={logo} 
-  //       alt='logo' 
-  //       value={icon}
-  //       onClick={() => createUser(icon)}
-  //       key={uuidv4()}
-  //     />
-  //   </div>
-  // ))
+  const layouts = Object.keys(content).map(topic => (
+    <TopicContainer key={uuidv4()} content={content[topic]} />
+  ))
 
   return(
     <div className='Spread'>
- 
+      { layouts }
     </div>
   )
 }
