@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Route, withRouter, Switch } from 'react-router-dom';
-import { getTopic } from '../../actions/thunks/getTopic';
+import { getTopic } from '../../thunks/getTopic';
 import { loginUser } from '../../actions/index'
 import { checkUser } from '../../utils/Helper'
 
