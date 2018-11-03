@@ -14,8 +14,9 @@ export const buildNews =  async (topic) => {
   return events;
 }
 
+
 export const fetchNews = async topic => {
-  const url = `https://newsapi.org/v2/everything?q=${topic}&sortBy=popularity&apiKey=${newsKey}`
+  const url = `https://newsapi.org/v2/everything?q=${topic}&sources=breitbart-news,fox-news,the-wall-street-journal,the-washington-times,the-american-conservative,the-washington-times&sortBy=popularity&apiKey=${newsKey}`
   const response =  await fetchRequest(url)
   return response.articles.map(article => {
     return {
