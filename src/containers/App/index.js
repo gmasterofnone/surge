@@ -1,42 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom';
+import { Route, withRouter, Switch } from 'react-router-dom';
+import { getTopic } from '../../actions/thunks/getTopic';
+import { loginUser } from '../../actions/index'
+import { checkUser } from '../../utils/Helper'
 
-import { getTopic } from '../../actions/thunks/getTopic'
+import Nav from '../Nav'
+import Login from '../Login';
 
-import logo from './logo.svg';
 import './App.css';
 
 
 class App extends Component {
   
-  componentDidMount() {
+  async componentDidMount() {
+    const user = checkUser()
     
-    this.props.getTopic('activism');
-  }
-
-  addTopic = () => {
-    this.props.getTopic('metoo')
+    user 
+      ? this.props.loginUser(user)
+      : this.props.history.push('/login')
   }
 
   render() {
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          <button onClick={this.addTopic}></button>
-        </header>
+        <Switch>
+          <Route exact path='/login' render={() => <Login />}/>
+          <Route path='/' render={() => <Nav />}/>
+        </Switch>
       </div>
     );
   }
@@ -45,11 +37,13 @@ class App extends Component {
 export const mapStateToProps = (state) => ({
   isLoading: state.isLoading,
   hasErrored: state.hasErrored,
-  content: state.content
+  content: state.content,
+  user: state.user
 })
 
 export const mapDispatchToProps = (dispatch) => ({
-  getTopic: (topic) => dispatch(getTopic(topic))
+  getTopic: (topic) => dispatch(getTopic(topic)),
+  loginUser: (user) => dispatch(loginUser(user))
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
