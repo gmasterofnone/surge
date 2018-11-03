@@ -8,13 +8,12 @@ import { checkUser } from '../../utils/Helper'
 import Nav from '../Nav'
 import Login from '../Login';
 
-
 import './App.css';
 
 
 class App extends Component {
   
-  componentDidMount() {
+  async componentDidMount() {
     const user = checkUser()
     
     user 

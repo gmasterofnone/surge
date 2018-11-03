@@ -3,18 +3,8 @@ export const fetchRequest = async url => {
     const response = await fetch(url);
     return await response.json();
   } catch(error) {
-    return 'fetch failed'
+    console.log(error.message)
   }
 }
 
 
-// export const fetchUsers = async url => {
-//   try {
-//     const response = await fetch(url, {
-
-//     });
-//     return await response.json();
-//   } catch(error) {
-//     return 'fetch failed'
-//   }
-// }

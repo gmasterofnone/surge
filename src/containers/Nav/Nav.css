@@ -21,9 +21,28 @@ header {
 }
 
 .search-btn {
+  position: relative;
   height: 25px;
   margin-bottom: 20px;
   cursor: pointer;
+  animation: bounce 1s;
+  transition: .2s;
+}
+
+header img {
+  transition: 2s;
+}
+
+@keyframes bounce {
+  0% {
+    margin-bottom: 20px;
+  }
+  50% {
+    margin-bottom: 35px;
+  }
+  100% {
+    margin-bottom: 20px;
+  }
 }
 
 .topic-form {
