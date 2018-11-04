@@ -1,7 +1,9 @@
 export const content = ( state = {}, action ) => {
   switch(action.type) {
     case 'ADD_TOPIC':
-      return {...state, [action.topic]: action.articles}
+    console.log(state)
+    const result = {...state, [action.topic]: action.articles}
+      return result
     case 'REMOVE_TOPIC':
       return Object.keys(state).reduce((newState, topic) =>{
         if (topic !== action.topic) {

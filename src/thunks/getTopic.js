@@ -6,6 +6,7 @@ export const getTopic = topic => {
     dispatch(isLoading(true))
     try {
       const response = await buildNews(topic)
+      console.log(response)
       dispatch(addTopic(topic, response))
       dispatch(isLoading(false))
     } catch(error) {

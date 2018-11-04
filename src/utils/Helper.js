@@ -14,23 +14,24 @@ export const buildNews =  async (topic) => {
   return events;
 }
 
-
 export const fetchNews = async topic => {
-  const url = `https://newsapi.org/v2/everything?q=${topic}&sources=breitbart-news,fox-news,the-wall-street-journal,the-washington-times,the-american-conservative,the-washington-times&sortBy=popularity&apiKey=${newsKey}`
+  topic = topic.replace(' ', '+')
+  const url = `https://newsapi.org/v2/everything?q=${topic}&sources=breitbart-news,fox-news,the-wall-street-journal,the-washington-times,the-american-conservative,the-washington-times,us&sortBy=popularity&apiKey=${newsKey}`
   const response =  await fetchRequest(url)
-  return response.articles.map(article => {
-    return {
-      id: uuidv4(),
-      source: article.source.name,
-      author: article.author,
-      title: article.title,
-      body: article.description || article.content,
-      link: article.url,
-      image: article.urlToImage,
-      date: convertDate(article.publishedAt),
-      comments: []
-    }
-  })
+  const result = response.articles.map((article, i) => ({
+    id: uuidv4(),
+    poop: i,
+    topic,
+    source: article.source.name,
+    author: article.author,
+    title: article.title,
+    body: article.content,
+    link: article.url,
+    image: article.urlToImage,
+    date: convertDate(article.publishedAt),
+    comments: []
+  }))
+  return result
 }
 
 const addUsers = async (topics) => {
@@ -55,19 +56,18 @@ const addUsers = async (topics) => {
 }
 
 export const buildEvents = (topics, users) => {
-  const results =  topics.map( article => {
+  topics.forEach( article => {
     let eventComments = 2;
     const numberOfComments = randomNumber(1, 20)
     while (eventComments < numberOfComments) {
       article.comments.push(users[randomNumber(0, users.length - 1)])
       eventComments++
     }
-    return article  
   })
-  return results
+  return topics
 }
 
-const randomNumber = (min, max) => {
+export const randomNumber = (min, max) => {
   min = Math.ceil(min);
 	max = Math.floor(max);
 	return Math.floor(Math.random() * (max - min + 1)) + min; 
@@ -89,7 +89,6 @@ const convertDate = string => {
   dateString = dateString.replace(',', '')
                         .replace('PM', 'p.m.')
                         .replace('AM', 'a.m.');
- 
   return dateString
 }
 

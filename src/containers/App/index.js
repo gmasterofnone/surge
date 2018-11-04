@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Route, withRouter, Switch } from 'react-router-dom';
-import { getTopic } from '../../thunks/getTopic';
 import { loginUser } from '../../actions/index'
 import { checkUser } from '../../utils/Helper'
 
@@ -45,7 +44,6 @@ export const mapStateToProps = (state) => ({
 })
 
 export const mapDispatchToProps = (dispatch) => ({
-  getTopic: (topic) => dispatch(getTopic(topic)),
   loginUser: (user) => dispatch(loginUser(user))
 })
 

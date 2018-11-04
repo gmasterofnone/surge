@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getTopic } from '../../actions/thunks/getTopic';
+import { getTopic } from '../../thunks/getTopic';
 import { removeTopic } from '../../actions'
 
 import logo from '../../assets/logo.svg';
