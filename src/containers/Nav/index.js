@@ -6,7 +6,7 @@ import { removeTopic } from '../../actions'
 import {randomNumber } from '../../utils/Helper'
 
 import logo from '../../assets/logo.svg';
-import loading from '../../assets/loading.gif'
+import loading from '../../assets/loading.svg'
 import add from '../../assets/add.svg';
 import close from '../../assets/close.svg';
 
@@ -52,7 +52,7 @@ export class Nav extends Component {
   }
   
   render() {
-    const { user } = this.props;
+    const { user, isLoading } = this.props;
     const { search, addTopic } = this.state;
     let uuidv4 = require("uuid/v4");
 
@@ -66,9 +66,7 @@ export class Nav extends Component {
             onClick={() => this.removeTopic(topic.search)}
           >{topic.search.toUpperCase()},</span> 
       )) 
-    } else {
-      displayTopics = <img className='loading' src={loading} alt='loading'/>
-    }
+    } 
 
     return(
       <header>
@@ -94,17 +92,21 @@ export class Nav extends Component {
           >
             <input autoFocus className='search'
               value={search}
-              style={{width: `${(search.length * 11.2) + 15}px`}}
+              style={{width: `${(search.length * 10) + 15}px`}}
               onChange={this.handleChange}
             />
           </form>
         }
-          <img 
-            className='search-btn'
-            src={addTopic ? close : add} 
-            alt='add button'
-            onClick={this.toggleAdd} 
-          />
+        {
+          isLoading &&
+          <img className='loading' src={loading} alt='loading'/>
+        }
+        <img 
+          className='search-btn'
+          src={addTopic ? close : add} 
+          alt='add button'
+          onClick={this.toggleAdd} 
+        />
       </header>
     )
   }
@@ -112,6 +114,8 @@ export class Nav extends Component {
 
 export const mapStateToProps = (state) => ({
   content: state.content,
+  user: state.user,
+  isLoading: state.isLoading
 })
 
 export const mapDispatchToProps = (dispatch) => ({

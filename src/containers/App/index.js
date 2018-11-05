@@ -29,7 +29,7 @@ class App extends Component {
       <div className="App">
         <Switch>
           <Route exact path='/login' render={() => <Login />}/>
-          <Route path='/' render={() => <Nav user={this.props.user}/>}/>
+          <Route path='/' render={() => <Nav/>}/>
         </Switch>
         <Spread />
       </div>
