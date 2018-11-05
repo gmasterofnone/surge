@@ -27,7 +27,7 @@ const TopicContainer = ( { content } ) => {
   return(
     <div className='topic-container'>
       <div 
-        className={RandomFeature ? 'feature-event' : 'feature-event-b'}
+        className='feature-event'
         style={{backgroundImage: `url(${image})`}}
       >
         <div className='feature-content-container'>

@@ -1,5 +1,4 @@
 .feature-event {
-  
   width: 100%;
   height: 800px;
   background-position: center center;
@@ -12,14 +11,6 @@
   
 }
 
-.feature-event-b {
-  height: 600px;
-  background-position: center center ;
-  background-repeat: no-repeat;
-  background-size: cover;
-  margin: 40px 50px 40px 50px;
-}
-
 .feature-content-container {
   display: flex;
   align-items: flex-end;
@@ -27,7 +18,7 @@
   color: white;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .feature-content {

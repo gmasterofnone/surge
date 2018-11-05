@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 
 import TopicContainer from '../../components/TopicContainer'
 
-
-
 import './Spread.css'
 
 export const Spread = ( { content } ) => {
@@ -23,7 +21,6 @@ export const Spread = ( { content } ) => {
 export const mapStateToProps = (state) => ({
   content: state.content
 })
-
 
 
 export default connect(mapStateToProps)(Spread)
