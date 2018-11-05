@@ -1,6 +1,6 @@
 import React from 'react';
 import { Spread } from '../containers/Spread';
-import { mapStateToProps, mapDispatchToProps } from '../containers/Spread';
+import { mapStateToProps } from '../containers/Spread';
 import { shallow } from 'enzyme';
 
 describe('Spread', () => {
@@ -11,7 +11,6 @@ describe('Spread', () => {
     mockContent = { immigration: [], elections: [] }
     wrapper = shallow(
       <Spread
-      
         content={mockContent}
       />
     )
