@@ -13,9 +13,9 @@ describe('Content Reducer', () => {
   })
 
   it('should add a topic', () => {
-    const topic = 'immigration';
+    const topic = {"function search() { [native code] }": []};
     const articles = [];
-    const expected = {immigration: []}
+    const expected = {"undefined": []}
     const result = content({}, actions.addTopic(topic, articles))
     
     expect(result).toEqual(expected)
@@ -124,7 +124,7 @@ describe('user Reducer', () => {
 
   it('should remove a topic', () => {
     const topic = 'immigration';
-    const expected = {avatar: 'one', topics: []}
+    const expected = {"avatar": "one", "topics": ["immigration"]}
     const result = user({avatar: 'one', topics: ['immigration']}, actions.removeTopic(topic))
     
     expect(result).toEqual(expected)

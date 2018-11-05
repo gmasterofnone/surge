@@ -1,14 +1,17 @@
 import { getTopic } from '../thunks/getTopic'
+import { isLoading, hasErrored, addTopic } from '../actions/'
+import { buildNews } from '../utils/Helper';
 
-import { buildNews } from '../utils/Helper'
 
-jest.mock('../utils/Helper')
+
+// jest.mock(buildNews = () => Promise.resolve([]))
 
 describe('getTopics', () => {
-  let mockTopic, mockDispatch;
+  let mockTopic;
+  let mockDispatch;
 
   beforeEach(() => {
-    mockTopic = 'immigration'
+    mockTopic = { search: 'immigration' }
     mockDispatch = jest.fn()
   })
 
@@ -18,30 +21,28 @@ describe('getTopics', () => {
 
     expect(mockDispatch).toHaveBeenCalledWith(isLoading(true))
   })
-
-
-
-
-
-
-
-
-
-
   
 
-  // it('should dispatch hasErrored(true) if the response is not ok', async () => {
-  //   window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
-  //     ok: false
-  //   }))
+  it('should dispatch isLoading(true) if the response is ok', async () => {
+    const thunk = getTopic(mockTopic)
+    await thunk(mockDispatch)
 
-  //   const thunk = fetchStaff(mockUrl)
+    expect(mockDispatch).toHaveBeenCalledWith(isLoading(true))
+  })
 
-  //   await thunk(mockDispatch)
-
-  //   expect(mockDispatch).toHaveBeenCalledWith(hasErrored(true))
-  //   expect(mockDispatch).not.toHaveBeenCalledWith(isLoading(false))
-  // })
+  it.skip('should dispatch the payload if the response is ok', async () => {
+    const mockPayload = [];
+    buildNews = jest.fn().mockImplementation(() => Promise.resolve({
+      ok: true,
+      json: () => Promise.resolve({
+        mockPayload
+      })
+    }))
+    const thunk = getTopic(mockTopic)
+    
+    await thunk(mockDispatch)
+    expect(mockDispatch).toHaveBeenCalledWith(addTopic(mockTopic, mockPayload))
+  })
 
   // it('should dispatch isLoading(false) if the response is ok', async () => {
   //   window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
