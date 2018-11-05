@@ -13,15 +13,36 @@ const TopicContainer = ( { content } ) => {
   ))
 
   const RandomFeature = randomNumber(0, 1)
-
+  const { topic, source, author, title, image, date, body, comments} = feature;
+  const cleanedTitle = title.split('-')
+  
+  const avatars = comments.map(comment => (
+    <img className={`avatars`} 
+      src={comment.avatar} 
+      alt={comment.name} 
+      key={uuidv4()} 
+    />
+  ))
+    
   return(
     <div className='topic-container'>
       <div 
         className={RandomFeature ? 'feature-event' : 'feature-event-b'}
-        style={{backgroundImage: `url(${feature.image})`}}
+        style={{backgroundImage: `url(${image})`}}
       >
+        <div className='feature-content-container'>
+          <div className='feature-content'>
+            <p className='feature-source'>{source.toUpperCase()} | <span>{date.toUpperCase()}</span></p>
+            <h1 className='feature-title'>{cleanedTitle[0]}</h1>
+            <p className='feature-body'>{body}</p>
+            <div className='comment-avatars'>
+              { avatars.slice(0, 3) }
+              <a className='comment-count'>{`${avatars.length} comments`}</a>
+            </div>
+          </div>
+          
+        </div>
       </div>
-      <hr/>
       <div className='event-container'>
         { events }
       </div>

@@ -16,7 +16,7 @@ export const buildNews =  async (topic) => {
 
 export const fetchNews = async topic => {
   const URLTopic = topic.replace(' ', '+')
-  const url = `https://newsapi.org/v2/everything?q=${URLTopic}&sources=breitbart-news,fox-news,the-wall-street-journal,the-washington-times,the-american-conservative,the-washington-times,us&pageSize=9&sortBy=popularity&apiKey=${newsKey}`
+  const url = `https://newsapi.org/v2/everything?q=${URLTopic}&sources=breitbart-news,fox-news,the-wall-street-journal,the-washington-times,the-american-conservative,the-washington-times,us&pageSize=7&sortBy=popularity&apiKey=${newsKey}`
   const response =  await fetchRequest(url)
   const { articles } = response;
 
@@ -26,7 +26,7 @@ export const fetchNews = async topic => {
     source: story.source.name,
     author: story.author,
     title: story.title,
-    body: story.content,
+    body: story.description,
     link: story.url,
     image: story.urlToImage,
     date: convertDate(story.publishedAt),
