@@ -1,18 +1,30 @@
+import { storeUser } from '../utils/Helper'
+
 export const user = ( state = {}, action) => {
+  let user, topics;
   switch(action.type) {
     case 'ADD_USER':
-      return {avatar: action.avatar, topics: []}
+      user = {avatar: action.avatar, topics: []}
+      storeUser(user)
+      return user
     case 'LOGIN_USER':
       return action.user
     case 'ADD_TOPIC':
-      return {...state, topics: [...state.topics, action.topic]}
+      const filterTopics = [...state.topics, action.topic]
+      topics = filterTopics.filter((topic, i) => filterTopics.indexOf(topic) === i)
+      user = {...state, topics}
+      storeUser(user)
+      return user 
     case 'REMOVE_TOPIC':
-      const topics = state.topics.filter(topic => 
-        (topic !== action.topic))
-      return {...state, topics}
+      topics = state.topics.filter(topic => 
+        (topic.search !== action.topic))
+      user = {...state, topics}
+      storeUser(user)
+      return user
     case 'DELETE_USER':
       return state
     default:
       return state
   }
 } 
+

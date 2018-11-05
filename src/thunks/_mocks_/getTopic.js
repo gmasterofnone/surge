@@ -1,1 +1,0 @@
-export const buildNews = jest.fn(() => Promise.resolve([{data: 'data'}]))

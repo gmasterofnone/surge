@@ -8,8 +8,6 @@ import { createUser } from '../../actions/index';
 import './Event.css'
 
 export const Event = ( { event } ) => {
-  // let uuidv4 = require("uuid/v4");
-  
 
   return(
     <div className='event'>
@@ -18,7 +16,7 @@ export const Event = ( { event } ) => {
       >
       </div>
       <p>{event.date}</p>
-      <p>{event.title}</p>
+      <p>{event.title[0]}</p>
       <p>{event.author}</p>
     </div>
   )

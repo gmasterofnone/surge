@@ -1,6 +1,5 @@
 import React from 'react';
 import './TopicContainer.css'
-import { randomNumber } from '../../utils/Helper'
 
 import { Event } from '../../containers/Event'
 let uuidv4 = require("uuid/v4");
@@ -12,9 +11,8 @@ const TopicContainer = ( { content } ) => {
     <Event key={uuidv4()} event={event} /> 
   ))
 
-  const RandomFeature = randomNumber(0, 1)
-  const { topic, source, author, title, image, date, body, comments} = feature;
-  const cleanedTitle = title.split('-')
+  const { source, title, image, date, body, comments} = feature;
+  // const cleanedTitle = title.split('-')
   
   const avatars = comments.map(comment => (
     <img className={`avatars`} 
@@ -33,14 +31,13 @@ const TopicContainer = ( { content } ) => {
         <div className='feature-content-container'>
           <div className='feature-content'>
             <p className='feature-source'>{source.toUpperCase()} | <span>{date.toUpperCase()}</span></p>
-            <h1 className='feature-title'>{cleanedTitle[0]}</h1>
+            <h1 className='feature-title'>{title[0]}</h1>
             <p className='feature-body'>{body}</p>
             <div className='comment-avatars'>
               { avatars.slice(0, 3) }
-              <a className='comment-count'>{`${avatars.length} comments`}</a>
+              <p className='comment-count'>{`${avatars.length} comments`}</p>
             </div>
-          </div>
-          
+          </div> 
         </div>
       </div>
       <div className='event-container'>

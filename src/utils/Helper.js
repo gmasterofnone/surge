@@ -7,6 +7,10 @@ export const checkUser = () => {
   return JSON.parse(localStorage.getItem('user'))
 }
 
+export const storeUser = user => {
+  return localStorage.setItem('user', JSON.stringify(user))
+}
+
 export const buildNews =  async (topic) => {
   const topics = await fetchNews(topic);
   const users = await addUsers(topics);
@@ -25,8 +29,8 @@ export const fetchNews = async topic => {
     topic,
     source: story.source.name,
     author: story.author,
-    title: story.title,
-    body: story.description,
+    title: story.title.split('-'),
+    body: story.content.slice(0, -14),
     link: story.url,
     image: story.urlToImage,
     date: convertDate(story.publishedAt),
