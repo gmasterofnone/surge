@@ -1,80 +1,56 @@
-// import React from 'react';
-// import { App } from '../containers/App';
-// import { mapStateToProps, mapDispatchToProps } from '../containers/App';
-// import { shallow } from 'enzyme';
+import React from 'react';
+import { App } from '../containers/App';
+import { mapStateToProps, mapDispatchToProps } from '../containers/App';
+import { shallow } from 'enzyme';
 
-// describe('APP', () => {
-//   let wrapper;
-//   let mockFetch;
-//   let mockMovies;
-//   let mockUser;
+describe('APP', () => {
+  let wrapper;
+  let mockMovies;
+  let mockUser;
 
-//   beforeEach(() => {
-//     mockFetch = jest.fn();
-//     mockMovies = [];
-//     mockUser = {};
-//     wrapper = shallow(
-//       <App
-//         // fetchMovies = {mockFetch}
-//         // movies={mockMovies}
-//         // user={mockUser}
-//       />
-//     )
-//   })
+  beforeEach(() => {
+    mockMovies = [];
+    mockUser = null;
+    wrapper = shallow(
+      <App
+        history={[]}
+        user={mockUser}
+      />
+    )
+  })
 
-//   it('should match the snapshot', () => {
-//     expect(wrapper).toMatchSnapshot();
-//   });
+  it('should match the snapshot', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
 
-//   it('should call fetchMovies on componentDidMount', async () =>{
-//     let mockMovies = {movies:[]};
-//     let mockFn = jest.fn().mockImplementation(() => (mockMovies));
-//     window.fetch = jest.fn().mockImplementation(() => {
-//       return Promise.resolve({
-//         json: () => Promise.resolve(mockFn)
-//       });
-//     });
-//     wrapper = shallow(
-//       <App
-//         fetchMovies={mockFn}
-//         movies={[]}
-//         favorites={[]}
-//       />);
-//     await wrapper.instance().componentDidMount();
-//     expect(mockFn).toHaveBeenCalled();
-//   });
+})
 
-//     it('should have default state login set to false and search set to an empty string', () => {
-//       expect(wrapper.state().login).toEqual(false);
-//       expect(wrapper.state().search).toEqual('');
-//     })
+describe('mapStateToProps', () => {
+  it('should have access to content and users', () => {
+    const mockStore = {
+      isLoading: false,
+      hasErrored: false,
+      user: {}
+    }
+    const expected = {...mockStore};
+    const result = mapStateToProps(mockStore);
+    expect(result).toEqual(expected);
+  });
+})
 
-//     it('should update state when activateLogin is invoked', () => {
-//       expect(wrapper.state().login).toEqual(false);
-//       wrapper.instance().activateLogin();
-//       expect(wrapper.state().login).toEqual(true);
-//     })   
-// });
+describe('mapDispatchToProps', () => {
+  it('should call dispatch when getTopic is invoked', () => {
+    const mockDispatch = jest.fn();
+    const mappedProps = mapDispatchToProps(mockDispatch);
+    mappedProps.getTopic({search: 'immigration'});
+    expect(mockDispatch).toHaveBeenCalled();
+  });
 
+  it('should call dispatch when loginUser is invoked', () => {
+    const mockDispatch = jest.fn();
+    const mappedProps = mapDispatchToProps(mockDispatch);
+    mappedProps.loginUser({});
+    expect(mockDispatch).toHaveBeenCalled();
+  });
 
-// describe('mapStateToProps', () => {
-//   it('should have access to movies and current user', () => {
-//     const mockStore = {
-//       movies: [],
-//       loading: '',
-//       user: {}
-//     }
-//     const expected = {...mockStore};
-//     const result = mapStateToProps(mockStore);
-//     expect(result).toEqual(expected);
-//   });
-// })
-
-// describe('mapDispatchToProps', () => {
-//   it('should call dispatch when fetchMovies is invoked', () => {
-//     const mockDispatch = jest.fn();
-//     const mappedProps = mapDispatchToProps(mockDispatch);
-//     mappedProps.fetchMovies({title: 'Venom'});
-//     expect(mockDispatch).toHaveBeenCalled();
-//   });
 })
