@@ -1,6 +1,6 @@
 header {
   display: flex;
-  margin: 30px 0 0 50px;
+  margin: 40px 0 0 50px;
   align-items: flex-end;
 }
 
@@ -26,7 +26,12 @@ header {
   margin-bottom: 20px;
   cursor: pointer;
   animation: bounce .75s;
-  /* transition: .2s; */
+}
+
+.loading {
+  margin: 0 8px 27px 0;
+  /* width: 100px;
+  height: 30px; */
 }
 
 header img {
@@ -67,7 +72,7 @@ header img {
 }
 
 .search-topics {
-  font-style: italic;
+  font-style: oblique;
   padding: 0 8px 0 0;
   margin-bottom: 20px;
 }
@@ -77,3 +82,4 @@ header img {
   text-decoration: line-through;
   filter: contrast(.25)
 }
+

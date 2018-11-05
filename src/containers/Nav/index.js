@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getTopic } from '../../actions/thunks/getTopic';
+import { getTopic } from '../../thunks/getTopic';
 import { removeTopic } from '../../actions'
+import {randomNumber } from '../../utils/Helper'
 
 import logo from '../../assets/logo.svg';
+import loading from '../../assets/loading.svg'
 import add from '../../assets/add.svg';
 import close from '../../assets/close.svg';
 
@@ -20,8 +22,6 @@ export class Nav extends Component {
     this.state = {
       addTopic: false,
       search: '',
-      topics: [],
-      avatar: ''
     }
   }
 
@@ -38,36 +38,36 @@ export class Nav extends Component {
     this.setState( { search: value } );
   }
 
-  addTopic = (event) => {
+  addTopic = event => {
     event.preventDefault();
-    const { search, topics } = this.state;
-    const randomColor = color[Math.round(Math.random() * 4 )];
-    this.setState( { topics: [...topics, {search, randomColor}] } );
-    this.props.getTopic(search)
+    const { search } = this.state;
+    const randomColor = color[randomNumber(0, 4)];
+    const topic = { search, randomColor };
+    this.props.getTopic(topic)
     this.setState( { search: '', addTopic: !this.state.addTopic } );
   }
 
   removeTopic = (name) => {
-    const topics = this.state.topics.filter(topic => 
-      (topic.search !== name))
-   this.setState( { topics });
    this.props.removeTopic(name)
   }
   
-
   render() {
-   const { user } = this.props;
-   const { search, topics, addTopic } = this.state;
-   let uuidv4 = require("uuid/v4");
+    const { user, isLoading } = this.props;
+    const { search, addTopic } = this.state;
+    let uuidv4 = require("uuid/v4");
 
-   const displayTopics = topics.map(topic => (
-      <span className={`${topic} search-topics`}
-        key={uuidv4()}
-        style={{color: `${topic.randomColor}`}}
-        onClick={() => this.removeTopic(topic.search)}
-      >{topic.search.toUpperCase()},</span> 
-   ))
-  
+    let displayTopics = [];
+
+    if (user.topics) {
+      displayTopics = user.topics.map(topic => (
+          <span className={`${topic} search-topics`}
+            key={uuidv4()}
+            style={{color: `${topic.randomColor}`}}
+            onClick={() => this.removeTopic(topic.search)}
+          >{topic.search.toUpperCase()},</span> 
+      )) 
+    } 
+
     return(
       <header>
         <div className='avatar-logo'>
@@ -84,7 +84,7 @@ export class Nav extends Component {
             alt='logo' 
           />
         </div>
-        {displayTopics}
+        { displayTopics }
         {
           addTopic &&
           <form className='topic-form' 
@@ -92,17 +92,21 @@ export class Nav extends Component {
           >
             <input autoFocus className='search'
               value={search}
-              style={{width: `${(search.length * 11.2) + 15}px`}}
+              style={{width: `${(search.length * 10) + 15}px`}}
               onChange={this.handleChange}
             />
           </form>
         }
-          <img 
-            className='search-btn'
-            src={addTopic ? close : add} 
-            alt='add button'
-            onClick={this.toggleAdd} 
-          />
+        {
+          isLoading &&
+          <img className='loading' src={loading} alt='loading'/>
+        }
+        <img 
+          className='search-btn'
+          src={addTopic ? close : add} 
+          alt='add button'
+          onClick={this.toggleAdd} 
+        />
       </header>
     )
   }
@@ -110,7 +114,8 @@ export class Nav extends Component {
 
 export const mapStateToProps = (state) => ({
   content: state.content,
-  user: state.user
+  user: state.user,
+  isLoading: state.isLoading
 })
 
 export const mapDispatchToProps = (dispatch) => ({

@@ -7,6 +7,10 @@ export const checkUser = () => {
   return JSON.parse(localStorage.getItem('user'))
 }
 
+export const storeUser = user => {
+  return localStorage.setItem('user', JSON.stringify(user))
+}
+
 export const buildNews =  async (topic) => {
   const topics = await fetchNews(topic);
   const users = await addUsers(topics);
@@ -14,23 +18,23 @@ export const buildNews =  async (topic) => {
   return events;
 }
 
-
 export const fetchNews = async topic => {
-  const url = `https://newsapi.org/v2/everything?q=${topic}&sources=breitbart-news,fox-news,the-wall-street-journal,the-washington-times,the-american-conservative,the-washington-times&sortBy=popularity&apiKey=${newsKey}`
+  const URLTopic = topic.replace(' ', '+')
+  const url = `https://newsapi.org/v2/everything?q=${URLTopic}&sources=breitbart-news,fox-news,the-wall-street-journal,the-washington-times,the-american-conservative,the-washington-times,us&pageSize=7&sortBy=popularity&apiKey=${newsKey}`
   const response =  await fetchRequest(url)
-  return response.articles.map(article => {
-    return {
-      id: uuidv4(),
-      source: article.source.name,
-      author: article.author,
-      title: article.title,
-      body: article.description || article.content,
-      link: article.url,
-      image: article.urlToImage,
-      date: convertDate(article.publishedAt),
-      comments: []
-    }
-  })
+  const { articles } = response;
+
+  return articles.map(story => ({
+    id: uuidv4(),
+    topic,
+    source: story.source.name,
+    author: story.author,
+    title: story.title.split('-'),
+    body: story.content.slice(0, -14),
+    link: story.url,
+    image: story.urlToImage,
+    date: convertDate(story.publishedAt),
+  }))
 }
 
 const addUsers = async (topics) => {
@@ -55,19 +59,19 @@ const addUsers = async (topics) => {
 }
 
 export const buildEvents = (topics, users) => {
-  const results =  topics.map( article => {
+  topics.forEach( article => {
+    article.comments = [];
     let eventComments = 2;
     const numberOfComments = randomNumber(1, 20)
     while (eventComments < numberOfComments) {
       article.comments.push(users[randomNumber(0, users.length - 1)])
       eventComments++
     }
-    return article  
   })
-  return results
+  return topics
 }
 
-const randomNumber = (min, max) => {
+export const randomNumber = (min, max) => {
   min = Math.ceil(min);
 	max = Math.floor(max);
 	return Math.floor(Math.random() * (max - min + 1)) + min; 
@@ -89,7 +93,6 @@ const convertDate = string => {
   dateString = dateString.replace(',', '')
                         .replace('PM', 'p.m.')
                         .replace('AM', 'a.m.');
- 
   return dateString
 }
 
