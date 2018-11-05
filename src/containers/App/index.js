@@ -11,7 +11,7 @@ import Spread from '../Spread';
 
 import './App.css';
 
-class App extends Component {
+export class App extends Component {
   
   componentDidMount() {
     const user = checkUser()
@@ -32,7 +32,7 @@ class App extends Component {
           <Route path='' render={() => <Nav/>}/>
         </Switch>
         <Spread />
-        
+
       </div>
     );
   }
