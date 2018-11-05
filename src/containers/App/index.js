@@ -39,8 +39,6 @@ class App extends Component {
 export const mapStateToProps = (state) => ({
   isLoading: state.isLoading,
   hasErrored: state.hasErrored,
-  content: state.content,
-  user: state.user
 })
 
 export const mapDispatchToProps = (dispatch) => ({

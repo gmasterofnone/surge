@@ -21,10 +21,7 @@ export const Spread = ( { content } ) => {
 }
 
 export const mapStateToProps = (state) => ({
-  isLoading: state.isLoading,
-  hasErrored: state.hasErrored,
-  content: state.content,
-  user: state.user
+  content: state.content
 })
 
 

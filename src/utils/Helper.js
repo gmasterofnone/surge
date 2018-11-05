@@ -15,23 +15,22 @@ export const buildNews =  async (topic) => {
 }
 
 export const fetchNews = async topic => {
-  topic = topic.replace(' ', '+')
-  const url = `https://newsapi.org/v2/everything?q=${topic}&sources=breitbart-news,fox-news,the-wall-street-journal,the-washington-times,the-american-conservative,the-washington-times,us&sortBy=popularity&apiKey=${newsKey}`
+  const URLTopic = topic.replace(' ', '+')
+  const url = `https://newsapi.org/v2/everything?q=${URLTopic}&sources=breitbart-news,fox-news,the-wall-street-journal,the-washington-times,the-american-conservative,the-washington-times,us&pageSize=9&sortBy=popularity&apiKey=${newsKey}`
   const response =  await fetchRequest(url)
-  const result = response.articles.map((article, i) => ({
+  const { articles } = response;
+
+  return articles.map(story => ({
     id: uuidv4(),
-    poop: i,
     topic,
-    source: article.source.name,
-    author: article.author,
-    title: article.title,
-    body: article.content,
-    link: article.url,
-    image: article.urlToImage,
-    date: convertDate(article.publishedAt),
-    comments: []
+    source: story.source.name,
+    author: story.author,
+    title: story.title,
+    body: story.content,
+    link: story.url,
+    image: story.urlToImage,
+    date: convertDate(story.publishedAt),
   }))
-  return result
 }
 
 const addUsers = async (topics) => {
@@ -57,6 +56,7 @@ const addUsers = async (topics) => {
 
 export const buildEvents = (topics, users) => {
   topics.forEach( article => {
+    article.comments = [];
     let eventComments = 2;
     const numberOfComments = randomNumber(1, 20)
     while (eventComments < numberOfComments) {
