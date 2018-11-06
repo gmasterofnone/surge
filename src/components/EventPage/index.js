@@ -12,12 +12,21 @@ class EventPage extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.blur()
+  }
+
+  componentWillUnmount() {
+    this.props.blur()
+  }
+
   render() {
     return(
       <div className='event-page-container'>
         <div className='event-page'>
            
         </div>
+     
       </div>
     )
   }

@@ -29,7 +29,12 @@ export const addTopic = (topic, articles) => ({
   articles
 })
 
-export const removeTopic = (topic) => ({
+export const removeTopic = topic => ({
   type: 'REMOVE_TOPIC',
   topic,
+})
+
+export const addFavorite = favorite => ({
+  type: 'ADD_FAVORITE',
+  favorite
 })

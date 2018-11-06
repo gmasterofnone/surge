@@ -22,6 +22,7 @@ export class Nav extends Component {
     this.state = {
       addTopic: false,
       search: '',
+      showFavorites: false
     }
   }
 
@@ -31,6 +32,10 @@ export class Nav extends Component {
       search : ''
       } 
     );
+  }
+
+  showFavorites = () => {
+    this.setState( { showFavorites: !this.state.showFavorites} )
   }
 
   handleChange = (event) => {
@@ -53,7 +58,7 @@ export class Nav extends Component {
   
   render() {
     const { user, isLoading } = this.props;
-    const { search, addTopic } = this.state;
+    const { search, addTopic, showFavorites } = this.state;
     let uuidv4 = require("uuid/v4");
 
     let displayTopics = [];
@@ -69,45 +74,54 @@ export class Nav extends Component {
     } 
 
     return(
-      <header>
-        <div className='avatar-logo'>
-          <Link to='/'>
+      <div>
+        <header>
+          <div className='avatar-logo'>
+            <Link to='/'>
+              <img 
+                className='avatar'
+                src={avatar[user.avatar]} 
+                alt='avatar' 
+                onClick={this.showFavorites}
+              />
+            </Link>
             <img 
-              className='avatar'
-              src={avatar[user.avatar]} 
-              alt='avatar' 
+              className='logo'
+              src={logo} 
+              alt='logo' 
             />
-          </Link>
+          </div>
+          { displayTopics }
+          {
+            addTopic &&
+            <form className='topic-form' 
+              onSubmit={this.addTopic}
+            >
+              <input autoFocus className='search'
+                value={search}
+                style={{width: `${(search.length * 10) + 15}px`}}
+                onChange={this.handleChange}
+              />
+            </form>
+          }
+          {
+            isLoading &&
+            <img className='loading' src={loading} alt='loading'/>
+          }
           <img 
-            className='logo'
-            src={logo} 
-            alt='logo' 
+            className='search-btn'
+            src={addTopic ? close : add} 
+            alt='add button'
+            onClick={this.toggleAdd} 
           />
-        </div>
-        { displayTopics }
+        </header>
         {
-          addTopic &&
-          <form className='topic-form' 
-            onSubmit={this.addTopic}
-          >
-            <input autoFocus className='search'
-              value={search}
-              style={{width: `${(search.length * 10) + 15}px`}}
-              onChange={this.handleChange}
-            />
-          </form>
+          showFavorites &&
+          <div className='favorites-section'>
+            hey
+          </div>
         }
-        {
-          isLoading &&
-          <img className='loading' src={loading} alt='loading'/>
-        }
-        <img 
-          className='search-btn'
-          src={addTopic ? close : add} 
-          alt='add button'
-          onClick={this.toggleAdd} 
-        />
-      </header>
+      </div>
     )
   }
 }
