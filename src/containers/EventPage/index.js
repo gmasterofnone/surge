@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import './EventPage.css'
+import { connect } from 'react-redux'
 
+import './EventPage.css'
 
 let uuidv4 = require("uuid/v4");
 
@@ -32,4 +33,8 @@ class EventPage extends Component {
   }
 }
 
-export default EventPage;
+export const mapDispatchToProps = (dispatch) => ({
+  createUser: (avatar) => dispatch(createUser(avatar))
+})
+
+export default connect(null, mapDispatchToProps)(EventPage)

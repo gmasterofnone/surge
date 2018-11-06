@@ -1,6 +1,6 @@
 .feature-event {
   width: 100%;
-  height: 800px;
+  height: 700px;
   background-position: center center;
   background-repeat: no-repeat;
   -webkit-background-size: cover;
@@ -23,40 +23,46 @@
 }
 
 .feature-content {
-  margin: 50px 0 10% 50px;
-  width: 40%;
+  margin: 50px 0 5% 50px;
+  width: 41%;
 }
 
 .feature-source, .comment-avatars {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 300;
-  font-size: .70rem;
 }
 
 .feature-source {
+  font-size: 14px;
   margin: 0 10px 20px 0;
 }
 
 .feature-title {
-  margin: 0 0 20px 0;
+  margin: 0 0 35px 0;
   font-size: 3rem;
 }
 
 .feature-body {
   line-height: 125%;
+  margin-bottom: 40px;
 }
 
-.comment-avatars {
+.comment-avatars, .event-comment-avatars {
   display: flex;
   align-items: center;
   position: relative;
+  margin-top: -15px;
 }
 
 .avatars {
-  border: .5px solid white;
+  border: .5px solid #41ead4;
   border-radius: 50%;
   height: 30px;
   margin-right: 5px;
+}
+
+.comment-count {
+  font-size: 14px;
 }
 
 .event-container {
@@ -69,6 +75,62 @@
   margin: 0 50px 40px 50px;
   padding: 40px 0 40px 0;
 }
+
+ul {
+  margin: 0;
+}
+
+.surge-container {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.surge-container li {
+  background: #ff0022;
+  position: relative;
+  width: 70%;
+  height: 10px;
+  margin-bottom: 35px;
+  margin-top: 8px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.surge-container label {
+  color: #fff;
+  position: relative;
+  margin-left: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.progressbar {
+  position: absolute;
+  width: 0%;
+  height: 100%;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-timing-function: ease-out;
+  animation-timing-function: ease-out;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.progressblue {
+  background-color: #41ead4;
+  
+}
+
+
+
 
 
 

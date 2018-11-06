@@ -1,5 +1,6 @@
 import { newsKey } from './API_keys'
-import { fetchRequest } from './API.js'
+import { fetchRequest, fetchUsers } from './API.js'
+
 
 let uuidv4 = require("uuid/v4");
 
@@ -24,22 +25,28 @@ export const fetchNews = async topic => {
   const response =  await fetchRequest(url)
   const { articles } = response;
 
-  return articles.map(story => ({
-    id: uuidv4(),
-    topic,
-    source: story.source.name,
-    author: story.author,
-    title: story.title.split('-'),
-    body: story.content.slice(0, -14),
-    link: story.url,
-    image: story.urlToImage,
-    date: convertDate(story.publishedAt),
-  }))
+  return articles.map(story => {
+    const surge = randomNumber(0, 100)
+    const attending = numberWithCommas(Math.round(surge * 135.5));
+    return {
+      id: uuidv4(),
+      topic,
+      surge,
+      attending,
+      source: story.source.name,
+      author: story.author,
+      title: story.title.split('-'),
+      body: story.content.slice(0, -14),
+      link: story.url,
+      image: story.urlToImage,
+      date: convertDate(story.publishedAt),
+    }
+  })
 }
 
 const addUsers = async (topics) => {
-  const url = 'https://randomuser.me/api/?results=100'
-  const response = await fetchRequest(url)
+  const url = 'https://randomuser.me/api/1.1/?results=1000'
+  const response = await fetchUsers(url)
 
   const users =  response.results.map(user => {
     let fName, lName;
@@ -59,11 +66,10 @@ const addUsers = async (topics) => {
 }
 
 export const buildEvents = (topics, users) => {
-  topics.forEach( article => {
+  topics.forEach(article => {
     article.comments = [];
     let eventComments = 2;
-    const numberOfComments = randomNumber(1, 20)
-    while (eventComments < numberOfComments) {
+    while (eventComments < article.surge / 2) {
       article.comments.push(users[randomNumber(0, users.length - 1)])
       eventComments++
     }
@@ -75,6 +81,10 @@ export const randomNumber = (min, max) => {
   min = Math.ceil(min);
 	max = Math.floor(max);
 	return Math.floor(Math.random() * (max - min + 1)) + min; 
+}
+
+export const numberWithCommas = (number) => {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 // NOT MY CODE BELOW
@@ -95,6 +105,7 @@ const convertDate = string => {
                         .replace('AM', 'a.m.');
   return dateString
 }
+
 
 
 

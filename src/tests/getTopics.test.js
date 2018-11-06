@@ -1,7 +1,6 @@
 import { getTopic } from '../thunks/getTopic'
 import { isLoading, hasErrored, addTopic } from '../actions/'
 import { buildNews } from '../utils/Helper';
-// import * as API from '../utils/Helper';
 
 jest.mock('../utils/Helper.js', () => ({
   buildNews: jest.fn().mockImplementation(() => Promise.resolve([]))
