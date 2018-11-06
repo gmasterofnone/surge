@@ -30,6 +30,7 @@ describe('mapStateToProps', () => {
     const mockStore = {
       isLoading: false,
       hasErrored: false,
+      content: {},
       user: {}
     }
     const expected = {...mockStore};
