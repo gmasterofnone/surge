@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Spread should match the snapshot 1`] = `
+<div
+  className="Spread"
+>
+  <TopicContainer
+    content={Array []}
+    key="4a7afb98-b860-4a9f-b15c-a4c6e264ed63"
+  />
+  <TopicContainer
+    content={Array []}
+    key="0e5a1454-cc92-43ae-82ae-3bdae003ebe3"
+  />
+</div>
+`;

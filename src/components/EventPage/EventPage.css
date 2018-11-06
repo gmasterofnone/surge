@@ -1,0 +1,24 @@
+.event-page-container {
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 100; 
+  
+}
+
+.event-page {
+  position: relative;
+  z-index: 110; 
+  width: 55%;
+  height: 100%;
+  background-color: white;
+  border-left: 1px solid lightgray;
+  top: -40px;
+}
+
+/* .App {
+  filter: blur(5px) brightness(.5);
+  transition: 2s;
+} */

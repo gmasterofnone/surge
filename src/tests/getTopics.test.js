@@ -1,10 +1,10 @@
 import { getTopic } from '../thunks/getTopic'
 import { isLoading, hasErrored, addTopic } from '../actions/'
-import { buildNews } from '../utils/Helper';
+import * as API from '../utils/Helper';
 
 
 
-// jest.mock(buildNews = () => Promise.resolve([]))
+jest.mock('../utils/Helper.js')
 
 describe('getTopics', () => {
   let mockTopic;
@@ -32,7 +32,7 @@ describe('getTopics', () => {
 
   it.skip('should dispatch the payload if the response is ok', async () => {
     const mockPayload = [];
-    buildNews = jest.fn().mockImplementation(() => Promise.resolve({
+    API.buildNews = jest.fn().mockImplementation(() => Promise.resolve({
       ok: true,
       json: () => Promise.resolve({
         mockPayload

@@ -1,5 +1,6 @@
 import React from 'react';
 import './TopicContainer.css'
+import { NavLink } from 'react-router-dom';
 
 import { Event } from '../../containers/Event'
 let uuidv4 = require("uuid/v4");
@@ -11,7 +12,7 @@ const TopicContainer = ( { content } ) => {
     <Event key={uuidv4()} event={event} /> 
   ))
 
-  const { source, title, image, date, body, comments} = feature;
+  const { source, title, image, date, body, comments, id} = feature;
   // const cleanedTitle = title.split('-')
   
   const avatars = comments.map(comment => (
@@ -28,7 +29,7 @@ const TopicContainer = ( { content } ) => {
         className='feature-event'
         style={{backgroundImage: `url(${image})`}}
       >
-        <div className='feature-content-container'>
+        <NavLink to={`/${id}`} className='feature-content-container'>
           <div className='feature-content'>
             <p className='feature-source'>{source.toUpperCase()} | <span>{date.toUpperCase()}</span></p>
             <h1 className='feature-title'>{title[0]}</h1>
@@ -38,7 +39,7 @@ const TopicContainer = ( { content } ) => {
               <p className='comment-count'>{`${avatars.length} comments`}</p>
             </div>
           </div> 
-        </div>
+        </NavLink>
       </div>
       <div className='event-container'>
         { events }

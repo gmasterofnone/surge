@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Nav should match the snapshot 1`] = `
+<header>
+  <div
+    className="avatar-logo"
+  >
+    <Link
+      replace={false}
+      to="/"
+    >
+      <img
+        alt="avatar"
+        className="avatar"
+      />
+    </Link>
+    <img
+      alt="logo"
+      className="logo"
+      src="logo.svg"
+    />
+  </div>
+  <img
+    alt="add button"
+    className="search-btn"
+    onClick={[Function]}
+    src="add.svg"
+  />
+</header>
+`;
