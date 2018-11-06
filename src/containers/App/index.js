@@ -13,6 +13,12 @@ import EventPage from '../../components/EventPage'
 import './App.css';
 
 export class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      blur: false
+    }
+  }
   
   componentDidMount() {
     const user = checkUser()
@@ -25,11 +31,16 @@ export class App extends Component {
     }
   }
 
-  render() {
-    const { content, match } = this.props;
+  blurBackground = () => {
+    this.setState({ blur: !this.state.blur } )
+  }
 
+  render() {
+    const { blur } = this.state;
+    const { content } = this.props;
+    
     return (
-      <div className={`App ${match.path === '/' ? '' : 'blur'}`}>
+      <div>
         <Route path='/:id' render={({match}) => {
             const { id } = match.params;
             let event;
@@ -38,17 +49,19 @@ export class App extends Component {
               return event = result;
             })
             if (event) {
-              return <EventPage event={event} />
+              return <EventPage event={event} blur={this.blurBackground} />
             } else {
               return null;
             } 
           }} 
         />
-        <Switch>
-          <Route exact path='/login' render={() => <Login />}/>
-          <Route path='' render={() => <Nav/>}/>
-        </Switch>
-        <Spread />
+        <div className={`App ${blur ? 'blur' : ''}`}>
+          <Switch>
+            <Route exact path='/login' render={() => <Login />}/>
+            <Route path='' component={Nav}/>
+          </Switch>
+          <Spread />
+        </div>
       </div>
     );
   }

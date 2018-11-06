@@ -4,7 +4,11 @@ export const user = ( state = {}, action) => {
   let user, topics;
   switch(action.type) {
     case 'ADD_USER':
-      user = {avatar: action.avatar, topics: []}
+      user = {avatar: action.avatar, topics: [], favorites: []}
+      storeUser(user)
+      return user
+    case 'ADD_FAVORITE':
+      user = {...state, favorites: [...state.favorites, action.favorite]}
       storeUser(user)
       return user
     case 'LOGIN_USER':

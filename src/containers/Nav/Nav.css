@@ -30,8 +30,6 @@ header {
 
 .loading {
   margin: 0 8px 27px 0;
-  /* width: 100px;
-  height: 30px; */
 }
 
 header img {
@@ -42,7 +40,7 @@ header img {
   0% {
     margin-bottom: 20px;
   }
-  50% {
+  20% {
     margin-bottom: 40px;
   }
   100% {
