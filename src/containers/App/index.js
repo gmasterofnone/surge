@@ -8,7 +8,7 @@ import { getTopic } from '../../thunks/getTopic'
 import Nav from '../Nav'
 import Login from '../Login';
 import Spread from '../Spread';
-import EventPage from '../../components/EventPage'
+import EventPage from '../EventPage'
 
 import './App.css';
 

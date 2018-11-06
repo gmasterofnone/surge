@@ -53,7 +53,7 @@ const addUsers = async (topics) => {
     fName = user.name.first[0].toUpperCase() + user.name.first.substr(1)
     lName = user.name.last[0].toUpperCase() + user.name.last.substr(1)
     const randomDescription = topics[randomNumber(0, topics.length - 1)].body;
-    const comment = randomDescription.slice(0, randomNumber(30, 70))
+    const comment = randomDescription.slice(24, randomNumber(50, 160))
    
     return {
       name: `${fName} ${lName}`,
@@ -69,7 +69,7 @@ export const buildEvents = (topics, users) => {
   topics.forEach(article => {
     article.comments = [];
     let eventComments = 2;
-    while (eventComments < article.surge / 2) {
+    while (eventComments < article.surge / 4) {
       article.comments.push(users[randomNumber(0, users.length - 1)])
       eventComments++
     }

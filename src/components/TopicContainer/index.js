@@ -55,7 +55,7 @@ const TopicContainer = ( { content } ) => {
             <h1 className='feature-title'>{title[0]}</h1>
             <p className='feature-body'>{body}</p>
             <ul className="surge-container">
-              <label>{`Surge Status | ${attending} Followers`}</label>
+              <label>{`Surge | ${attending} Followers`}</label>
               <li>
                 <span className="progressbar progressblue" id={`surge-${randomStyle}`}></span>
               </li>

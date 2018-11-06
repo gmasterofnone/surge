@@ -53,7 +53,7 @@ export const Event = ( { event } ) => {
         </div>
         <div className='event-interaction'>
           <ul className="surge-container-event">
-            <label>{`Surge Status | ${attending} Followers`}</label>
+            <label>{`Surge | ${attending} Followers`}</label>
             <li>
               <span className="progressbar-event progressblue-event" id={`surge-${randomStyle}`}></span>
             </li>
