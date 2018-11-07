@@ -8,14 +8,12 @@
 }
 
 .event-page {
-  position: absolute;
+  position: fixed;
   z-index: 110; 
   width: 50%;
   height: 100vh;
   background-color: white;
   border-left: 1px solid lightgray;
-  top: 0;
-  bottom: 0;
   padding: 5%;
   overflow-y: scroll;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { randomNumber } from '../../utils/Helper';
-// import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { createUser } from '../../actions/index';
 
 
@@ -9,7 +9,7 @@ import { createUser } from '../../actions/index';
 import './Event.css'
 
 export const Event = ( { event } ) => {
-  const { source, title, image, date, body, comments, id, surge, attending, author } = event;
+  const { title, image, body, comments, surge, attending, id } = event;
   let uuidv4 = require("uuid/v4");
 
   let randomStyle = randomNumber(0, 20000)
@@ -41,30 +41,32 @@ export const Event = ( { event } ) => {
   ))
 
   return(
-    <div className='event'>
-      <div className='event-image'
-        style={{backgroundImage: `url(${image})`}}
-      >
-      </div>
-      <div className='event-info'>
-        <div>
-          <h3 className='event-title'>{title[0]}</h3>
-          <p className='event-body'>{body.slice(0, 130)}...</p>
+    <NavLink className='event-link' to={`/${id}`}>
+      <div className='event'>
+        <div className='event-image'
+          style={{backgroundImage: `url(${image})`}}
+        >
         </div>
-        <div className='event-interaction'>
-          <ul className="surge-container-event">
-            <label>{`Surge | ${attending} Followers`}</label>
-            <li>
-              <span className="progressbar-event progressblue-event" id={`surge-${randomStyle}`}></span>
-            </li>
-          </ul>
-          <div className='event-comment-avatars'>
-            { avatars.slice(0, randomNumber(3, 5)) }
-            <p className='event-comment-count'>{`${avatars.length} comments`}</p>
+        <div className='event-info'>
+          <div>
+            <h3 className='event-title'>{title[0]}</h3>
+            <p className='event-body'>{body.slice(0, 130)}...</p>
+          </div>
+          <div className='event-interaction'>
+            <ul className="surge-container-event">
+              <label>{`Surge | ${attending} Followers`}</label>
+              <li>
+                <span className="progressbar-event progressblue-event" id={`surge-${randomStyle}`}></span>
+              </li>
+            </ul>
+            <div className='event-comment-avatars'>
+              { avatars.slice(0, randomNumber(3, 5)) }
+              <p className='event-comment-count'>{`${avatars.length} comments`}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </NavLink>
   )
 }
 
