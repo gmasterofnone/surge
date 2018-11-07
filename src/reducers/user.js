@@ -1,7 +1,6 @@
 import { storeUser } from '../utils/Helper'
 
 export const user = ( state = {}, action) => {
-  console.log(action)
   let user, topics;
   switch(action.type) {
     case 'ADD_USER':
@@ -9,11 +8,13 @@ export const user = ( state = {}, action) => {
       storeUser(user)
       return user
     case 'TOGGLE_FAVORITE':
-      if (state.favorites.includes(action.id)) {
-        const favorites = state.favorites.filter(fav => fav !== action.id)
+    const favId = state.favorites.map(fav => fav.id)
+    console.log(action.article)
+      if (favId.includes(action.article.id)) {
+        const favorites = state.favorites.filter(fav => fav.id !== action.article.id)
         user = {...state, favorites}
       } else {
-        user = {...state, favorites: [...state.favorites, action.id]}
+        user = {...state, favorites: [...state.favorites, action.article]}
       }
       storeUser(user)
       return user
