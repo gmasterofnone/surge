@@ -35,6 +35,6 @@ export const removeTopic = topic => ({
 })
 
 export const toggleFavorite = id => ({
-  type: 'ADD_FAVORITE',
+  type: 'TOGGLE_FAVORITE',
   id
 })

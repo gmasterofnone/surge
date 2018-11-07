@@ -33,6 +33,7 @@ export const fetchNews = async topic => {
       topic,
       surge,
       attending,
+      favorite: false,
       source: story.source.name,
       author: story.author,
       title: story.title.split('-'),

@@ -3,13 +3,15 @@ export const content = ( state = {}, action ) => {
     case 'ADD_TOPIC':
       return {...state, [action.topic.search]: action.articles}
     case 'TOGGLE_FAVORITE':
+    console.log(action)
       return Object.keys(state).reduce((newState, topic) =>{
         state[topic].forEach(article => {
           if (article.id === action.id) {
+            article.favorite = !article.favorite
             newState[topic] = state[topic];
-            newState[topic][article].id = !newState[topic][article].id;
+          } else {
+            newState[topic] = state[topic];
           }
-          newState[topic] = state[topic];
         });
         return newState;
       }, {}) || state

@@ -2,7 +2,7 @@ import React from 'react';
 import './TopicContainer.css'
 import { NavLink } from 'react-router-dom';
 
-import { Event } from '../../containers/Event';
+import EventCard from '../../containers/Event';
 import { randomNumber } from '../../utils/Helper';
 let uuidv4 = require("uuid/v4");
 
@@ -10,7 +10,7 @@ export const TopicContainer = ( { content } ) => {
   const feature = content[0]
   const childEvents = content.filter(event => event.title !== feature.title)
   const events = childEvents.map(event => (
-    <Event key={uuidv4()} event={event} /> 
+    <EventCard key={uuidv4()} event={event} /> 
   ))
 
   const { source, title, image, date, body, comments, id, surge, attending } = feature;

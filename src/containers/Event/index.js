@@ -12,9 +12,11 @@ import share from '../../assets/share.svg'
 
 import './Event.css'
 
-export const Event = ( { event } ) => {
-  const { title, image, body, comments, surge, attending, id } = event;
+export const EventCard = ( { event, toggleFavorite } ) => {
+  const { title, image, body, comments, surge, attending, id, favorite } = event;
   let uuidv4 = require("uuid/v4");
+
+ 
 
   let randomStyle = randomNumber(0, 20000)
   
@@ -49,8 +51,13 @@ export const Event = ( { event } ) => {
         <div className='event-image'
           style={{backgroundImage: `url(${image})`}}
         >
-          <div className='favorite-container'>
-
+          <div className='event-favorite-container'>
+            <img className='fav-btn' 
+              src={favorite ? addTrue : addFalse} 
+              alt='favorite button'
+              onClick={() => toggleFavorite(id)}
+            />
+            <img className='share-btn' src={share} alt='share button'/>
           </div>
         </div>
         <NavLink className='event-link' to={`/${id}`}>
@@ -81,4 +88,4 @@ export const mapDispatchToProps = (dispatch) => ({
   toggleFavorite: (id) => dispatch(toggleFavorite(id))
 })
 
-export default connect(null, mapDispatchToProps)(Event)
+export default connect(null, mapDispatchToProps)(EventCard)
