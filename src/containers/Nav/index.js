@@ -77,6 +77,13 @@ export class Nav extends Component {
       <div>
         <header>
           <div className='avatar-logo'>
+            {
+              user.favorites && user.favorites.length > 0
+                ? <div className='fav-count'>
+                    <p className='fav-number'>{user.favorites.length}</p>
+                  </div>
+                : null
+            }
             <Link to='/'>
               <img 
                 className='avatar'

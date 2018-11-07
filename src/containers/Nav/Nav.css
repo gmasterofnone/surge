@@ -6,6 +6,29 @@ header {
 
 .avatar-logo {
   margin-right: 10px;
+  position: relative;
+}
+
+.fav-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background-color: rgb(255, 255, 255, .9);
+  border: 1px solid black;
+  border-radius: 50%;
+  position: absolute;
+  top: 53px;
+  left: 52px;
+}
+
+.fav-number {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: .75rem;
+  font-weight: 600;
+  margin: 0;
+  padding-right: 1px;
 }
 
 .avatar {
@@ -25,7 +48,7 @@ header {
   height: 25px;
   margin-bottom: 20px;
   cursor: pointer;
-  animation: bounce .75s;
+  animation: bounce 1s;
 }
 
 .loading {
@@ -40,7 +63,7 @@ header img {
   0% {
     margin-bottom: 20px;
   }
-  20% {
+  30% {
     margin-bottom: 40px;
   }
   100% {
