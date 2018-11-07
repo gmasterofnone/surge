@@ -2,7 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { randomNumber } from '../../utils/Helper';
 import { NavLink } from 'react-router-dom'
-import { createUser } from '../../actions/index';
+import { toggleFavorite } from '../../actions/index';
+
+import addTrue from '../../assets/add-true.svg'
+import addFalse from '../../assets/add-false.svg'
+import share from '../../assets/share.svg'
 
 
 
@@ -41,37 +45,40 @@ export const Event = ( { event } ) => {
   ))
 
   return(
-    <NavLink className='event-link' to={`/${id}`}>
-      <div className='event'>
+    <div className='event'>
         <div className='event-image'
           style={{backgroundImage: `url(${image})`}}
         >
-        </div>
-        <div className='event-info'>
-          <div>
-            <h3 className='event-title'>{title[0]}</h3>
-            <p className='event-body'>{body.slice(0, 130)}...</p>
+          <div className='favorite-container'>
+
           </div>
-          <div className='event-interaction'>
-            <ul className="surge-container-event">
-              <label>{`Surge | ${attending} Followers`}</label>
-              <li>
-                <span className="progressbar-event progressblue-event" id={`surge-${randomStyle}`}></span>
-              </li>
-            </ul>
-            <div className='event-comment-avatars'>
-              { avatars.slice(0, randomNumber(3, 5)) }
-              <p className='event-comment-count'>{`${avatars.length} comments`}</p>
+        </div>
+        <NavLink className='event-link' to={`/${id}`}>
+          <div className='event-info'>
+            <div>
+              <h3 className='event-title'>{title[0]}</h3>
+              <p className='event-body'>{body.slice(0, 130)}...</p>
+            </div>
+            <div className='event-interaction'>
+              <ul className="surge-container-event">
+                <label>{`Surge | ${attending} Followers`}</label>
+                <li>
+                  <span className="progressbar-event progressblue-event" id={`surge-${randomStyle}`}></span>
+                </li>
+              </ul>
+              <div className='event-comment-avatars'>
+                { avatars.slice(0, randomNumber(3, 5)) }
+                <p className='event-comment-count'>{`${avatars.length} comments`}</p>
+              </div>
             </div>
           </div>
-        </div>
+      </NavLink>
       </div>
-    </NavLink>
   )
 }
 
 export const mapDispatchToProps = (dispatch) => ({
-  createUser: (avatar) => dispatch(createUser(avatar))
+  toggleFavorite: (id) => dispatch(toggleFavorite(id))
 })
 
 export default connect(null, mapDispatchToProps)(Event)
