@@ -22,7 +22,6 @@ export class App extends Component {
   
   componentDidMount() {
     const user = checkUser()
-
     if (user) {
       this.props.loginUser(user)
       user.topics.forEach(topic => this.props.getTopic(topic))

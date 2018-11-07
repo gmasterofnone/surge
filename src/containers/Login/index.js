@@ -8,7 +8,7 @@ import logo from '../../assets/logo.svg';
 
 import './Login.css'
 
-export const login = ( { createUser } ) => {
+export const Login = ( { createUser } ) => {
   let uuidv4 = require("uuid/v4");
   const avatars = Object.keys(avatar).map(icon => (
     <div className='avatar-container' key={uuidv4()}>
@@ -44,4 +44,4 @@ export const mapDispatchToProps = (dispatch) => ({
   createUser: (avatar) => dispatch(createUser(avatar))
 })
 
-export default connect(null, mapDispatchToProps)(login)
+export default connect(null, mapDispatchToProps)(Login)

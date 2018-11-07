@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 import './EventPage.css'
 
-let uuidv4 = require("uuid/v4");
+
 
 class EventPage extends Component {
   constructor() {
