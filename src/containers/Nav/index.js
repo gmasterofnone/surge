@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getTopic } from '../../thunks/getTopic';
-import { removeTopic } from '../../actions'
+import { removeTopic, toggleFavorite, createUser } from '../../actions'
 import {randomNumber } from '../../utils/Helper'
 
 import logo from '../../assets/logo.svg';
@@ -59,13 +59,17 @@ export class Nav extends Component {
   removeTopic = (name) => {
    this.props.removeTopic(name)
   }
+
   
   render() {
-    const { user, isLoading } = this.props;
+    const { user, isLoading, toggleFavorite, createUser } = this.props;
     const { search, addTopic, showFavorites } = this.state;
     let uuidv4 = require("uuid/v4");
 
     let displayTopics = [];
+    let favoriteArticles = [];
+
+    
 
     if (user.topics) {
       displayTopics = user.topics.map(topic => (
@@ -75,6 +79,24 @@ export class Nav extends Component {
             onClick={() => this.removeTopic(topic.search)}
           >{topic.search.toUpperCase()},</span> 
       )) 
+      favoriteArticles = user.favorites.map(favorite => (
+        <li key={uuidv4()} className='fav-list'>
+          <img className='fav-article-img' 
+            src={favorite.image}
+            alt='favorite article'
+          />
+          <div>
+            <h3 
+              className='fav-title'>{favorite.title[0].slice(0, 30).toUpperCase()}...
+            </h3>
+            <p 
+              className='fav-delete'
+              onClick={()=> toggleFavorite()}
+            >delete
+            </p>
+          </div>
+        </li>
+      ))
     } 
 
     return(
@@ -110,7 +132,10 @@ export class Nav extends Component {
             >
               <input autoFocus className='search'
                 value={search}
-                style={{width: `${(search.length * 10) + 15}px`}}
+                placeholder='enter topic'
+                style={ search.length 
+                  ? {width: `${(search.length * 10) + 15}px`}
+                  : {width: `105px`}}
                 onChange={this.handleChange}
               />
             </form>
@@ -129,7 +154,25 @@ export class Nav extends Component {
         {
           showFavorites &&
           <div className='favorites-section'>
-           
+            <div>
+              <div className='controls-container'>
+                <div className='close-favs-btn' 
+                  onClick={this.showFavorites}
+                >
+                  <p className='close-icon'>✕</p>
+                </div>
+                <p className='close-account'
+                  onClick={() => createUser()}
+                >close account
+                </p>
+              </div>
+            </div>
+            <div>
+              <ul className='favorites-container'>
+                { favoriteArticles }
+              </ul>
+
+            </div>  
           </div>
         }
       </div>
@@ -145,7 +188,9 @@ export const mapStateToProps = (state) => ({
 
 export const mapDispatchToProps = (dispatch) => ({
   getTopic: (topic) => dispatch(getTopic(topic)),
-  removeTopic: (topic) => dispatch(removeTopic(topic))
+  removeTopic: (topic) => dispatch(removeTopic(topic)),
+  toggleFavorite: (topic) => dispatch(toggleFavorite(topic)),
+  createUser: () => dispatch(createUser())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Nav)

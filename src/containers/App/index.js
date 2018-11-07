@@ -55,14 +55,12 @@ export class App extends Component {
             } 
           }} 
         />
-
         <div className={`App ${blur ? 'blur' : ''}`}>
           <Switch>
             <Route exact path='/login' render={() => <Login />}/>
             <Route exact path='/error' component={NoMatch} />
             <Route path='/' render={() => (<div><Nav/><Spread/></div>)}/>
           </Switch>
-    
         </div>
       </div>
     );
