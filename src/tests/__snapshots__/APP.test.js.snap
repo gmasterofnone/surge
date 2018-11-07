@@ -17,10 +17,14 @@ exports[`APP should match the snapshot 1`] = `
       />
       <Route
         component={[Function]}
-        path=""
+        exact={true}
+        path="/error"
+      />
+      <Route
+        path="/"
+        render={[Function]}
       />
     </Switch>
-    <Connect(Spread) />
   </div>
 </div>
 `;

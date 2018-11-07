@@ -79,7 +79,7 @@ export class Nav extends Component {
 
     return(
       <div>
-        <header className={showFavorites ? 'add-margin' : ''}>
+        <header>
           <div className='avatar-logo'>
             {
               user.favorites && user.favorites.length > 0

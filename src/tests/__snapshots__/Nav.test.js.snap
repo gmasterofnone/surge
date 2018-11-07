@@ -6,6 +6,16 @@ exports[`Nav should match the snapshot 1`] = `
     <div
       className="avatar-logo"
     >
+      <div
+        className="fav-count"
+        onClick={[Function]}
+      >
+        <p
+          className="fav-number"
+        >
+          1
+        </p>
+      </div>
       <Link
         replace={false}
         to="/"
