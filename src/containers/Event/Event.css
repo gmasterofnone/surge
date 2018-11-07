@@ -5,6 +5,11 @@
   box-sizing: border-box;
 }
 
+.event-link {
+  text-decoration: none;
+  color: black;
+}
+
 .event-image {
   width: 100%;
   height: 250px;

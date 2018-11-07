@@ -6,7 +6,7 @@ import { Event } from '../../containers/Event';
 import { randomNumber } from '../../utils/Helper';
 let uuidv4 = require("uuid/v4");
 
-const TopicContainer = ( { content } ) => {
+export const TopicContainer = ( { content } ) => {
   const feature = content[0]
   const childEvents = content.filter(event => event.title !== feature.title)
   const events = childEvents.map(event => (

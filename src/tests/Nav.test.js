@@ -65,6 +65,12 @@ describe('Nav', () => {
     wrapper.instance().removeTopic(name)
   });
 
+  it('should toggle favorites section', () => {
+    wrapper.find('.avatar').simulate('click')
+
+    expect(wrapper.state().showFavorites).toEqual(true);
+  });
+
 })
 
 describe('mapStateToProps', () => {

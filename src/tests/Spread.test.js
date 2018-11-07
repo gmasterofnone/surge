@@ -6,8 +6,10 @@ import { shallow } from 'enzyme';
 describe('Spread', () => {
   let wrapper;
   let mockContent;
+  let uuidv4;
  
   beforeEach(() => {
+    uuidv4 = require("uuid/v4");
     mockContent = { immigration: [], elections: [] }
     wrapper = shallow(
       <Spread

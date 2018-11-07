@@ -86,7 +86,7 @@ describe('user Reducer', () => {
 
   it('should add a user', () => {
     const avatar = 'one';
-    const expected = {avatar, topics: []}
+    const expected = {"avatar": "one", "favorites": [], "topics": []}
     const result = user({}, actions.createUser(avatar))
     
     expect(result).toEqual(expected)
@@ -94,7 +94,7 @@ describe('user Reducer', () => {
 
   it('should add a user', () => {
     const avatar = 'one';
-    const expected = {avatar, topics: []}
+    const expected = {"avatar": "one", "favorites": [], "topics": []}
     const result = user({}, actions.createUser(avatar))
     
     expect(result).toEqual(expected)
@@ -130,7 +130,6 @@ describe('user Reducer', () => {
     expect(result).toEqual(expected)
   })
 
- 
-
-
 })
+
+

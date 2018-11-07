@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom'
 
 import './EventPage.css'
 
-let uuidv4 = require("uuid/v4");
 
-class EventPage extends Component {
+
+export class EventPage extends Component {
   constructor() {
     super()
     this.state = {
@@ -23,9 +23,7 @@ class EventPage extends Component {
 
   loadComments = (userComment) => {
     const { comments } = this.props.event
-    
     this.setState( { comments: [...this.state.comments, ...comments]} )
-  
   }
 
   componentWillUnmount() {
@@ -33,7 +31,7 @@ class EventPage extends Component {
   }
 
   render() {
-    const { source, title, image, date, body, comments, id, surge, attending, author } = this.props.event;
+    const { title, image, body, surge, attending } = this.props.event;
     let uuidv4 = require("uuid/v4");
 
     let randomStyle = randomNumber(0, 20000)

@@ -19,9 +19,17 @@ describe('APP', () => {
     )
   })
 
-  it.skip('should match the snapshot', () => {
+  it('should match the snapshot', () => {
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should blur the background when called', () => {
+    wrapper.instance().blurBackground()
+
+    expect(wrapper.state().blur).toEqual(true)
+  })
+
+
 
 })
 
