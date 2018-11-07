@@ -9,7 +9,6 @@ export const user = ( state = {}, action) => {
       return user
     case 'TOGGLE_FAVORITE':
     const favId = state.favorites.map(fav => fav.id)
-    console.log(action.article)
       if (favId.includes(action.article.id)) {
         const favorites = state.favorites.filter(fav => fav.id !== action.article.id)
         user = {...state, favorites}
@@ -33,7 +32,9 @@ export const user = ( state = {}, action) => {
       storeUser(user)
       return user
     case 'DELETE_USER':
-      return state
+    console.log('hey')
+      localStorage.removeItem('user')
+      return {}
     default:
       return state
   }

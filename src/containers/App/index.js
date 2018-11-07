@@ -43,7 +43,6 @@ export class App extends Component {
       <div>
         <Route path='/:id' render={({match}) => {
             const { id } = match.params;
-            
             Object.keys(content).find(topic => {
               const result = content[topic].find(event => event.id === id)
               return event = result;
@@ -51,7 +50,7 @@ export class App extends Component {
             if (event) {
               return <EventPage event={event} blur={this.blurBackground} />
             } else {
-              return <Redirect to='/error' />;
+              return null;
             } 
           }} 
         />

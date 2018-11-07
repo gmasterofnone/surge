@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getTopic } from '../../thunks/getTopic';
-import { removeTopic, toggleFavorite, createUser } from '../../actions'
+import { removeTopic, toggleFavorite, deleteUser } from '../../actions'
 import {randomNumber } from '../../utils/Helper'
 
 import logo from '../../assets/logo.svg';
@@ -60,9 +60,14 @@ export class Nav extends Component {
    this.props.removeTopic(name)
   }
 
+  closeAccount = () => {
+    this.props.deleteUser();
+    window.location.reload()
+  }
+
   
   render() {
-    const { user, isLoading, toggleFavorite, createUser } = this.props;
+    const { user, isLoading, toggleFavorite } = this.props;
     const { search, addTopic, showFavorites } = this.state;
     let uuidv4 = require("uuid/v4");
 
@@ -91,7 +96,7 @@ export class Nav extends Component {
             </h3>
             <p 
               className='fav-delete'
-              onClick={()=> toggleFavorite()}
+              onClick={()=> toggleFavorite(favorite.id)}
             >delete
             </p>
           </div>
@@ -162,7 +167,7 @@ export class Nav extends Component {
                   <p className='close-icon'>✕</p>
                 </div>
                 <p className='close-account'
-                  onClick={() => createUser()}
+                  onClick={this.closeAccount}
                 >close account
                 </p>
               </div>
@@ -190,7 +195,7 @@ export const mapDispatchToProps = (dispatch) => ({
   getTopic: (topic) => dispatch(getTopic(topic)),
   removeTopic: (topic) => dispatch(removeTopic(topic)),
   toggleFavorite: (topic) => dispatch(toggleFavorite(topic)),
-  createUser: () => dispatch(createUser())
+  deleteUser: () => dispatch(deleteUser())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Nav)
