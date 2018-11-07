@@ -89,6 +89,7 @@ class EventPage extends Component {
               </li>
             </ul>
           </div>
+          <p className='comments-tag'>Comments</p>
           <ul className='user-comments-section'>
             {userComments}
           </ul>

@@ -53,7 +53,7 @@ const addUsers = async (topics) => {
     fName = user.name.first[0].toUpperCase() + user.name.first.substr(1)
     lName = user.name.last[0].toUpperCase() + user.name.last.substr(1)
     const randomDescription = topics[randomNumber(0, topics.length - 1)].body;
-    const comment = randomDescription.slice(24, randomNumber(50, 160))
+    const comment = randomDescription.slice(24, randomNumber(100, 180))
    
     return {
       name: `${fName} ${lName}`,
