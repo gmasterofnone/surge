@@ -30,6 +30,15 @@ describe('Content Reducer', () => {
     expect(result).toEqual(expected)
   })
 
+  it('should toggle a favorite', () => {
+    const id = '1';
+    const articles = [{}];
+    const expected = {immigration: [{favorite: true, id: 1}]}
+    const result = content({immigration: [{favorite: false, id: 1}]}, actions.toggleFavorite(id))
+    
+    expect(result).toEqual(expected)
+  })
+
 })
 
 describe('hasErrored Reducer', () => {
@@ -126,6 +135,14 @@ describe('user Reducer', () => {
     const topic = 'immigration';
     const expected = {"avatar": "one", "topics": ["immigration"]}
     const result = user({avatar: 'one', topics: ['immigration']}, actions.removeTopic(topic))
+    
+    expect(result).toEqual(expected)
+  })
+
+  it('should add a favorite', () => {
+    const id = 1;
+    const expected = {"avatar": "one", "topics": ["immigration"], favorites: [1]}
+    const result = user({avatar: 'one', topics: ['immigration']}, actions.toggleFavorite(id))
     
     expect(result).toEqual(expected)
   })
