@@ -35,7 +35,11 @@ export class Nav extends Component {
   }
 
   showFavorites = () => {
-    this.setState( { showFavorites: !this.state.showFavorites} )
+    const { favorites } = this.props.user;
+
+    if (favorites.length) {
+      this.setState( { showFavorites: !this.state.showFavorites} )
+    }
   }
 
   handleChange = (event) => {
@@ -75,11 +79,11 @@ export class Nav extends Component {
 
     return(
       <div>
-        <header>
+        <header className={showFavorites ? 'add-margin' : ''}>
           <div className='avatar-logo'>
             {
               user.favorites && user.favorites.length > 0
-                ? <div className='fav-count'>
+                ? <div className='fav-count' onClick={this.showFavorites}>
                     <p className='fav-number'>{user.favorites.length}</p>
                   </div>
                 : null
@@ -125,7 +129,7 @@ export class Nav extends Component {
         {
           showFavorites &&
           <div className='favorites-section'>
-            hey
+           
           </div>
         }
       </div>
