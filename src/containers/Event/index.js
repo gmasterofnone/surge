@@ -51,6 +51,20 @@ export const EventCard = ( { event, toggleFavorite } ) => {
         <div className='event-image'
           style={{backgroundImage: `url(${image})`}}
         >
+          {
+            favorite &&
+          <div className='event-favorite-container'
+            style={{opacity: `1`}}
+          >
+            <img className='fav-btn' 
+              src={addTrue} 
+              alt='favorite button'
+              onClick={() => toggleFavorite(id)}
+            />
+          </div>
+          }
+          {
+            !favorite &&
           <div className='event-favorite-container'>
             <img className='fav-btn' 
               src={favorite ? addTrue : addFalse} 
@@ -59,6 +73,7 @@ export const EventCard = ( { event, toggleFavorite } ) => {
             />
             <img className='share-btn' src={share} alt='share button'/>
           </div>
+          }
         </div>
         <NavLink className='event-link' to={`/${id}`}>
           <div className='event-info'>

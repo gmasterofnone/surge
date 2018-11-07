@@ -9,7 +9,12 @@ export const user = ( state = {}, action) => {
       storeUser(user)
       return user
     case 'TOGGLE_FAVORITE':
-      user = {...state, favorites: [...state.favorites, action.id]}
+      if (state.favorites.includes(action.id)) {
+        const favorites = state.favorites.filter(fav => fav !== action.id)
+        user = {...state, favorites}
+      } else {
+        user = {...state, favorites: [...state.favorites, action.id]}
+      }
       storeUser(user)
       return user
     case 'LOGIN_USER':

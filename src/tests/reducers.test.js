@@ -31,7 +31,7 @@ describe('Content Reducer', () => {
   })
 
   it('should toggle a favorite', () => {
-    const id = '1';
+    const id = 1;
     const articles = [{}];
     const expected = {immigration: [{favorite: true, id: 1}]}
     const result = content({immigration: [{favorite: false, id: 1}]}, actions.toggleFavorite(id))
