@@ -6,8 +6,6 @@ import { Link } from 'react-router-dom'
 
 import './EventPage.css'
 
-
-
 export class EventPage extends Component {
   constructor() {
     super()
@@ -63,8 +61,6 @@ export class EventPage extends Component {
         </div>
       </li>
     ))
-
-    console.log(this.state.comments)
 
 
     return(

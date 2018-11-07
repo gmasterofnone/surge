@@ -34,7 +34,7 @@ export const removeTopic = topic => ({
   topic,
 })
 
-export const addFavorite = favorite => ({
-  type: 'ADD_FAVORITE',
-  favorite
+export const toggleFavorite = id => ({
+  type: 'TOGGLE_FAVORITE',
+  id
 })
