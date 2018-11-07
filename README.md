@@ -12,20 +12,19 @@ The concept I came up with is a sort of mash-up of Flipboard and Pinterest: User
 
 
 ## Set Up
-Clone down and follow instructions for setting up [this backend repository.](https://github.com/turingschool-examples/movie-tracker)
 
-Clone down this repo and make sure it is next to the backend directory.
+Clone down this repo:
 
 Run `npm install` from the root directory.
 
-Run `npm start` and visit localhost:3001 in your browser.
+Run `npm start` 
 
 Run tests with `npm test`.
 
 ## Final Result
 
-![alt tag](https://github.com/gmasterofnone/movieTracker/blob/master/public/images/screen-a.png "Screen-shot of App")
+![alt tag](https://github.com/gmasterofnone/surge/blob/master/public/images/screen-a.png "Screen-shot of App")
 
-![alt tag](https://github.com/gmasterofnone/movieTracker/blob/master/public/images/screen-b.png "Screen-shot of App")
+![alt tag](https://github.com/gmasterofnone/surge/blob/master/public/images/screen-b.png "Screen-shot of App")
 
 
