@@ -141,8 +141,9 @@ describe('user Reducer', () => {
 
   it('should add a favorite', () => {
     const id = 1;
-    const expected = {"avatar": "one", "topics": ["immigration"], favorites: [1]}
-    const result = user({avatar: 'one', topics: ['immigration']}, actions.toggleFavorite(id))
+    const expected = {"avatar": undefined, "topics": [], favorites: [1]}
+    const state = user({}, actions.createUser())
+    const result = user(state, actions.toggleFavorite(id))
     
     expect(result).toEqual(expected)
   })
