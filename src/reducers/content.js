@@ -13,14 +13,14 @@ export const content = ( state = {}, action ) => {
           }
         });
         return newState;
-      }, {}) || state
+      }, {}) 
     case 'REMOVE_TOPIC':
       return Object.keys(state).reduce((newState, topic) =>{
         if (topic !== action.topic) {
          newState[topic] = state[topic]
         }
         return newState;
-      }, {}) || state
+      }, {}) 
     default:
       return state;
   }
