@@ -1,7 +1,11 @@
 header {
   display: flex;
-  margin: 40px 0 0 50px;
+  margin: 40px 0 40px 50px;
   align-items: flex-end;
+}
+
+.add-margin {
+  margin: 40px 0 40px 50px;
 }
 
 .avatar-logo {
@@ -21,6 +25,7 @@ header {
   position: absolute;
   top: 53px;
   left: 52px;
+  cursor: pointer;
 }
 
 .fav-number {
@@ -104,3 +109,85 @@ header img {
   filter: contrast(.25)
 }
 
+
+.favorites-section {
+  background-color: #41ead4;
+  display: flex;
+  min-height: 200px;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.controls-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 90px;
+  margin-left: 56px;
+}
+
+.close-favs-btn {
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  height: 70px;
+  margin-top: 20px;
+  width: 70px;
+}
+
+.close-icon {
+  font-size: 3rem;
+  color: black;
+  margin: 0;
+}
+
+.close-account {
+  color: black;
+  font-size: .8rem;
+}
+
+.close-account:hover {
+  cursor: pointer;
+  color: #ff0022;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.favorites-container {
+  margin: 20px 0 20px 0;
+  list-style-type: none;
+}
+
+.fav-list {
+  display: flex;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.fav-list:hover .fav-delete {
+  display: unset;
+}
+
+.fav-article-img {
+  height: 100px;
+  margin-right: 20px;
+}
+
+.fav-title {
+  font-style: italic; 
+}
+
+.fav-delete {
+  display: none;
+}
+
+.fav-delete:hover {
+  cursor: pointer;
+  color: #ff0022;
+  text-decoration: underline;
+  font-weight: bold;
+}

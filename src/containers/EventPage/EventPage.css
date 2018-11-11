@@ -18,6 +18,10 @@
   overflow-y: scroll;
 }
 
+.page-image:hover .event-favorite-container {
+  opacity: 1;
+}
+
 .close-btn {
   position: absolute;
   font-family: Arial, Helvetica, sans-serif;

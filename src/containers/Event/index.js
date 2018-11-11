@@ -59,7 +59,7 @@ export const EventCard = ( { event, toggleFavorite } ) => {
             <img className='fav-btn' 
               src={addTrue} 
               alt='favorite button'
-              onClick={() => toggleFavorite(id)}
+              onClick={() => toggleFavorite(event)}
             />
           </div>
           }
@@ -69,7 +69,7 @@ export const EventCard = ( { event, toggleFavorite } ) => {
             <img className='fav-btn' 
               src={favorite ? addTrue : addFalse} 
               alt='favorite button'
-              onClick={() => toggleFavorite(id)}
+              onClick={() => toggleFavorite(event)}
             />
             <img className='share-btn' src={share} alt='share button'/>
           </div>
@@ -79,7 +79,7 @@ export const EventCard = ( { event, toggleFavorite } ) => {
           <div className='event-info'>
             <div>
               <h3 className='event-title'>{title[0]}</h3>
-              <p className='event-body'>{body.slice(0, 130)}...</p>
+              {/* <p className='event-body'>{body.slice(0, 130)}...</p> */}
             </div>
             <div className='event-interaction'>
               <ul className="surge-container-event">
@@ -100,7 +100,7 @@ export const EventCard = ( { event, toggleFavorite } ) => {
 }
 
 export const mapDispatchToProps = (dispatch) => ({
-  toggleFavorite: (id) => dispatch(toggleFavorite(id))
+  toggleFavorite: (article) => dispatch(toggleFavorite(article))
 })
 
 export default connect(null, mapDispatchToProps)(EventCard)

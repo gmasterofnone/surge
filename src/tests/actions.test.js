@@ -70,4 +70,15 @@ describe('actions', () => {
     const result = actions.removeTopic(topic);
     expect(result).toEqual(expected);
   })
+
+  it('should have a type of TOGGLE_FAVORITE', () => {
+    const topic = {};
+    const expected = {
+      type: 'TOGGLE_FAVORITE',
+      article
+    }
+    const result = actions.toggleFavorite(topic);
+    expect(result).toEqual(expected);
+  })
+
 })

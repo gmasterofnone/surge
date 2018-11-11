@@ -9,6 +9,7 @@ import Nav from '../Nav'
 import Login from '../Login';
 import Spread from '../Spread';
 import EventPage from '../EventPage'
+import NoMatch from '../../components/NoMatch'
 
 import './App.css';
 
@@ -37,12 +38,11 @@ export class App extends Component {
   render() {
     const { blur } = this.state;
     const { content } = this.props;
-    
+    let event;
     return (
       <div>
         <Route path='/:id' render={({match}) => {
             const { id } = match.params;
-            let event;
             Object.keys(content).find(topic => {
               const result = content[topic].find(event => event.id === id)
               return event = result;
@@ -57,9 +57,9 @@ export class App extends Component {
         <div className={`App ${blur ? 'blur' : ''}`}>
           <Switch>
             <Route exact path='/login' render={() => <Login />}/>
-            <Route path='' component={Nav}/>
+            <Route exact path='/error' component={NoMatch} />
+            <Route path='/' render={() => (<div><Nav/><Spread/></div>)}/>
           </Switch>
-          <Spread />
         </div>
       </div>
     );

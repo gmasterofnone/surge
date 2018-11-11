@@ -1,4 +1,4 @@
-import { newsKey } from './API_keys'
+import { newsKey, googleKey, ipKey } from './API_keys'
 import { fetchRequest, fetchUsers } from './API.js'
 
 
@@ -13,10 +13,25 @@ export const storeUser = user => {
 }
 
 export const buildNews =  async (topic) => {
+  // const location = await getUserLocation();
+  // const venues = await getLocalVenues(location);
   const topics = await fetchNews(topic);
   const users = await addUsers(topics);
-  const events = buildEvents(topics, users)
-  return events;
+  const articles = addSocial(topics, users)
+  // const events = buildEvents(venues, articles)
+  return articles;
+}
+
+export const getUserLocation = async () => {
+  const url = `http://api.ipstack.com/check?access_key=${ipKey}`
+  const response = await fetchUsers(url)
+  return { lat: response.latitude, lon: response.longitude }
+}
+
+export const getLocalVenues = async location => {
+  const url = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.lat},${location.lon}&radius=50000&rankby=prominence&type=city_hall&key=${googleKey}`;
+  const response =  await fetchRequest(url)
+  return response.results
 }
 
 export const fetchNews = async topic => {
@@ -26,8 +41,13 @@ export const fetchNews = async topic => {
   const { articles } = response;
 
   return articles.map(story => {
-    const surge = randomNumber(0, 100)
-    const attending = numberWithCommas(Math.round(surge * 135.5));
+    let surge
+    if (randomNumber(0, 4) === 0 ) {
+      surge = 100;
+    } else {
+      surge = randomNumber(23, 100)
+    }
+    const attending = numberWithCommas(surge * randomNumber(55, 392));
     return {
       id: uuidv4(),
       topic,
@@ -66,7 +86,7 @@ const addUsers = async (topics) => {
   return users
 }
 
-export const buildEvents = (topics, users) => {
+export const addSocial = (topics, users) => {
   topics.forEach(article => {
     article.comments = [];
     let eventComments = 2;
@@ -76,6 +96,35 @@ export const buildEvents = (topics, users) => {
     }
   })
   return topics
+}
+
+export const buildEvents = (venues, articles) => {
+  articles.forEach(article => {
+    if (article.surge === 100) {
+      const randomVenue = venues[randomNumber(0, venues.length)]
+      const { lat, lng } = randomVenue.geometry.location;
+      const map = `http://maps.googleapis.com/maps/api/staticmap?&size=600x300&style=visibility:on
+        &style=feature:water%7Celement:geometry%7Cvisibility:on
+        &style=feature:landscape%7Celement:geometry%7Cvisibility:on
+        &markers=icon:https://www.dropbox.com/s/vp2bfkh2wb1237b/surge.png?raw=1%7C${lat},${lng}
+        &zoom=10
+        &key=AIzaSyBGVFK7tEQpovztJTCkzUehZpobDuUNTXQ`
+
+      let date = new Date();
+      date.setDate((date.getDate() + randomNumber(1, 14)));
+      date.setHours(((date.getHours() - randomNumber(1, 5))))
+
+      const event = {
+        map,
+        name: randomVenue.name,
+        address: randomVenue.vicinity,
+        date: date.toLocaleString()
+      }
+      article.event = event;  
+      console.log(article)
+    }
+  })
+  return articles;
 }
 
 export const randomNumber = (min, max) => {
@@ -106,7 +155,3 @@ const convertDate = string => {
                         .replace('AM', 'a.m.');
   return dateString
 }
-
-
-
-

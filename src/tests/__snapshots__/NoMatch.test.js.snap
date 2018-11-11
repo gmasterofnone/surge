@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoMatch should match the snapshot 1`] = `
+<div
+  className="error-page"
+>
+  <div
+    className="error-container"
+  >
+    <img
+      alt="404 page"
+      className="whoops"
+      src="whoops.svg"
+    />
+    <h1
+      className="error-header"
+    >
+      Blue screen....You broke it...
+    </h1>
+    <h3
+      className="error-message"
+    >
+      ERROR 404: CLICK 
+      <Link
+        className="error-redirect"
+        replace={false}
+        to="/"
+      >
+        HERE
+      </Link>
+       TO UN-BREAK
+    </h3>
+  </div>
+</div>
+`;

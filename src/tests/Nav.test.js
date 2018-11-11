@@ -10,7 +10,7 @@ describe('Nav', () => {
   let mockUser;
 
   beforeEach(() => {
-    mockUser = { topics: []};
+    mockUser = { topics: [], favorites: [{id: 1}]};
     mockAddTopic = jest.fn()
     mockRemoveTopic = jest.fn()
     wrapper = shallow(

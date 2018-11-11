@@ -5,7 +5,7 @@ export const content = ( state = {}, action ) => {
     case 'TOGGLE_FAVORITE':
       return Object.keys(state).reduce((newState, topic) =>{
         state[topic].forEach(article => {
-          if (article.id === action.id) {
+          if (article.id === action.article.id) {
             article.favorite = !article.favorite
             newState[topic] = state[topic];
           } else {
@@ -13,14 +13,14 @@ export const content = ( state = {}, action ) => {
           }
         });
         return newState;
-      }, {}) || state
+      }, {}) 
     case 'REMOVE_TOPIC':
       return Object.keys(state).reduce((newState, topic) =>{
         if (topic !== action.topic) {
          newState[topic] = state[topic]
         }
         return newState;
-      }, {}) || state
+      }, {}) 
     default:
       return state;
   }
