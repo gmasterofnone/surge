@@ -12,8 +12,8 @@ import share from '../../assets/share.svg'
 
 import './Event.css'
 
-export const EventCard = ( { event, toggleFavorite } ) => {
-  const { title, image, body, comments, surge, attending, id, favorite } = event;
+export const EventCard = ( { event } ) => {
+  const { title, image, comments, surge, attending, id, favorite } = event;
   let uuidv4 = require("uuid/v4");
 
  
@@ -51,48 +51,26 @@ export const EventCard = ( { event, toggleFavorite } ) => {
         <div className='event-image'
           style={{backgroundImage: `url(${image})`}}
         >
-          {
-            favorite &&
-          <div className='event-favorite-container'
-            style={{opacity: `1`}}
-          >
-            <img className='fav-btn' 
-              src={addTrue} 
-              alt='favorite button'
-              onClick={() => toggleFavorite(event)}
-            />
-          </div>
-          }
-          {
-            !favorite &&
-          <div className='event-favorite-container'>
-            <img className='fav-btn' 
-              src={favorite ? addTrue : addFalse} 
-              alt='favorite button'
-              onClick={() => toggleFavorite(event)}
-            />
-            <img className='share-btn' src={share} alt='share button'/>
-          </div>
-          }
+        <div className='event-screen'></div>
+              <h3 className='event-title'>{title[0]}</h3>
+          <ul className="surge-container-event">
+            <label>{`${surge}% Surged /// ${attending} Followers`}</label>
+            <li>
+              <span className="progressbar-event progressblue-event" id={`surge-${randomStyle}`}></span>
+            </li>
+          </ul>
         </div>
         <NavLink className='event-link' to={`/${id}`}>
           <div className='event-info'>
             <div>
-              <h3 className='event-title'>{title[0]}</h3>
-              {/* <p className='event-body'>{body.slice(0, 130)}...</p> */}
             </div>
-            <div className='event-interaction'>
-              <ul className="surge-container-event">
-                <label>{`Surge | ${attending} Followers`}</label>
-                <li>
-                  <span className="progressbar-event progressblue-event" id={`surge-${randomStyle}`}></span>
-                </li>
-              </ul>
-              <div className='event-comment-avatars'>
-                { avatars.slice(0, randomNumber(3, 5)) }
-                <p className='event-comment-count'>{`${avatars.length} comments`}</p>
-              </div>
-            </div>
+ 
+{/*           
+            <div className='event-comment-avatars'>
+              { avatars.slice(0, randomNumber(3, 5)) }
+              <p className='event-comment-count'>{`${avatars.length} comments`}</p>
+      
+            </div> */}
           </div>
       </NavLink>
       </div>
