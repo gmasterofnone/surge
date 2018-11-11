@@ -3,6 +3,13 @@ import { connect } from 'react-redux'
 import { randomNumber } from '../../utils/Helper';
 import { Link } from 'react-router-dom'
 
+import { toggleFavorite } from '../../actions/index';
+
+import addTrue from '../../assets/add-true.svg'
+import addFalse from '../../assets/add-false.svg'
+import share from '../../assets/share.svg'
+
+
 
 import './EventPage.css'
 
@@ -29,7 +36,8 @@ export class EventPage extends Component {
   }
 
   render() {
-    const { title, image, body, surge, attending } = this.props.event;
+    const { title, image, body, surge, attending, favorite } = this.props.event;
+    const article = this.props.event;
     let uuidv4 = require("uuid/v4");
 
     let randomStyle = randomNumber(0, 20000)
@@ -70,6 +78,29 @@ export class EventPage extends Component {
           <div className='eventpage-image'
               style={{backgroundImage: `url(${image})`}}
           >
+           {
+            favorite &&
+          <div className='event-favorite-container'
+            style={{opacity: `1`}}
+          >
+            <img className='fav-btn' 
+              src={addTrue} 
+              alt='favorite button'
+              onClick={() => toggleFavorite(article)}
+            />
+          </div>
+          }
+          {
+            !favorite &&
+          <div className='event-favorite-container'>
+            <img className='fav-btn' 
+              src={favorite ? addTrue : addFalse} 
+              alt='favorite button'
+              onClick={() => toggleFavorite(article)}
+            />
+            <img className='share-btn' src={share} alt='share button'/>
+          </div>
+          }
           </div>
           <div>
             <h1 className='eventpage-title'>{title[0]}</h1>
@@ -95,7 +126,7 @@ export class EventPage extends Component {
 }
 
 export const mapDispatchToProps = (dispatch) => ({
-  // createUser: (avatar) => dispatch(createUser(avatar))
+  toggleFavorite: (article) => dispatch(toggleFavorite(article))
 })
 
 export default connect(null, mapDispatchToProps)(EventPage)

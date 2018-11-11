@@ -79,7 +79,7 @@ export const EventCard = ( { event, toggleFavorite } ) => {
           <div className='event-info'>
             <div>
               <h3 className='event-title'>{title[0]}</h3>
-              <p className='event-body'>{body.slice(0, 130)}...</p>
+              {/* <p className='event-body'>{body.slice(0, 130)}...</p> */}
             </div>
             <div className='event-interaction'>
               <ul className="surge-container-event">

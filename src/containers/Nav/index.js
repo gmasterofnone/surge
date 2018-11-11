@@ -37,9 +37,9 @@ export class Nav extends Component {
   showFavorites = () => {
     const { favorites } = this.props.user;
 
-    if (favorites.length) {
-      this.setState( { showFavorites: !this.state.showFavorites} )
-    }
+    
+    this.setState( { showFavorites: !this.state.showFavorites} )
+    
   }
 
   handleChange = (event) => {
@@ -96,7 +96,7 @@ export class Nav extends Component {
             </h3>
             <p 
               className='fav-delete'
-              onClick={()=> toggleFavorite(favorite.id)}
+              onClick={()=> toggleFavorite(favorite)}
             >delete
             </p>
           </div>
