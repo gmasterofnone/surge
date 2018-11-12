@@ -15,9 +15,6 @@ import './Event.css'
 export const EventCard = ( { event } ) => {
   const { title, image, comments, surge, attending, id, favorite } = event;
   let uuidv4 = require("uuid/v4");
-
- 
-
   let randomStyle = randomNumber(0, 20000)
   
   let styleSheet = document.styleSheets[0];
@@ -38,41 +35,51 @@ export const EventCard = ( { event } ) => {
   styleSheet.insertRule(keyframes, styleSheet.cssRules.length);
   styleSheet.insertRule(surgeStyle, styleSheet.cssRules.length);
 
-  const avatars = comments.map(comment => (
-    <img className={`avatars`} 
-      src={comment.avatar} 
-      alt={comment.name} 
-      key={uuidv4()} 
-    />
-  ))
+  let position = -18;
+  let divStyle;
+
+  const randomComments = comments.slice(0, randomNumber(5, 9))
+
+  const avatars = randomComments.map(comment => {
+    position += 18;
+    divStyle = {
+      position: "absolute",
+      left: `${position}px`,
+    };
+
+    return <img className={`${uuidv4()} avatar-tiles`} 
+            style={divStyle}
+            src={comment.avatar} 
+            alt='avatar'
+            key={uuidv4()} 
+          />
+  })
 
   return(
     <div className='event'>
         <div className='event-image'
           style={{backgroundImage: `url(${image})`}}
         >
-        <div className='event-screen'></div>
-              <h3 className='event-title'>{title[0]}</h3>
+          <div className='event-screen'></div>
+          <NavLink className='event-link' to={`/${id}`}>
+            <h3 className='event-title'>{title[0]}</h3>
+            <div className='avatar-container'>
+              { avatars.slice(0, -2) }
+              <p className='event-comment-count'
+                style={divStyle}
+              >{`${comments.length} Comments`}
+              </p>
+            </div>  
+          </NavLink>
           <ul className="surge-container-event">
-            <label>{`${surge}% Surged /// ${attending} Followers`}</label>
+            <label className={surge ===100 ? 'surged' : ''}
+            >{`${surge === 100 ? 'Surged' : `${surge}% Surged`} /// ${attending} Followers`}
+            </label>
             <li>
               <span className="progressbar-event progressblue-event" id={`surge-${randomStyle}`}></span>
             </li>
           </ul>
         </div>
-        <NavLink className='event-link' to={`/${id}`}>
-          <div className='event-info'>
-            <div>
-            </div>
- 
-{/*           
-            <div className='event-comment-avatars'>
-              { avatars.slice(0, randomNumber(3, 5)) }
-              <p className='event-comment-count'>{`${avatars.length} comments`}</p>
-      
-            </div> */}
-          </div>
-      </NavLink>
       </div>
   )
 }

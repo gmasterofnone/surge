@@ -56,7 +56,7 @@ export const fetchNews = async topic => {
       favorite: false,
       source: story.source.name,
       author: story.author,
-      title: story.title.split('-'),
+      title: story.title.split(' - '),
       body: story.content.slice(0, -14),
       link: story.url,
       image: story.urlToImage,
@@ -90,7 +90,7 @@ export const addSocial = (topics, users) => {
   topics.forEach(article => {
     article.comments = [];
     let eventComments = 2;
-    while (eventComments < article.surge / 4) {
+    while (eventComments < article.surge / randomNumber(3, 5)) {
       article.comments.push(users[randomNumber(0, users.length - 1)])
       eventComments++
     }
