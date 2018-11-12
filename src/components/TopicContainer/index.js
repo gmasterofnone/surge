@@ -13,16 +13,8 @@ export const TopicContainer = ( { content } ) => {
     <EventCard key={uuidv4()} event={event} /> 
   ))
 
-  const { source, title, image, date, body, comments, id, surge, attending } = feature;
+  const { source, title, image, date,comments, id, surge, attending } = feature;
   
-  const avatars = comments.map(comment => (
-    <img className={`avatars`} 
-      src={comment.avatar} 
-      alt={comment.name} 
-      key={uuidv4()} 
-    />
-  ))
-
   let randomStyle = randomNumber(0, 20000)
   
   let styleSheet = document.styleSheets[0];
@@ -42,6 +34,27 @@ export const TopicContainer = ( { content } ) => {
   
   styleSheet.insertRule(keyframes, styleSheet.cssRules.length);
   styleSheet.insertRule(surgeStyle, styleSheet.cssRules.length);
+
+  let position = -22;
+  let divStyle;
+
+  const randomComments = comments.slice(0, randomNumber(5, 9))
+
+  const avatars = randomComments.map(comment => {
+    position += 22;
+    divStyle = {
+      position: "absolute",
+      left: `${position}px`,
+    };
+
+  return <img className={`${uuidv4()} feature-avatar-tiles`} 
+            style={divStyle}
+            src={comment.avatar} 
+            alt='avatar'
+            key={uuidv4()} 
+          />
+  })
+
     
   return(
     <div className='topic-container'>
@@ -49,23 +62,26 @@ export const TopicContainer = ( { content } ) => {
         className='feature-event'
         style={{backgroundImage: `url(${image})`}}
       >
-        <NavLink to={`/${id}`} className='feature-content-container'>
-          <div className='feature-content'>
-            <p className='feature-source'>{source.toUpperCase()} | <span>{date.toUpperCase()}</span></p>
-            <h1 className='feature-title'>{title[0]}</h1>
-            <p className='feature-body'>{body}</p>
-            <ul className="surge-container">
-              <label>{`Surge | ${attending} Followers`}</label>
-              <li>
-                <span className="progressbar progressblue" id={`surge-${randomStyle}`}></span>
-              </li>
-            </ul>
-            <div className='comment-avatars'>
-              { avatars.slice(0, 3) }
-              <p className='comment-count'>{`${avatars.length} comments`}</p>
-            </div>
-          </div> 
-        </NavLink>
+        <div className='event-screen'></div>
+          <NavLink className='event-link' to={`/${id}`}>
+            <p className='feature-source'>{`${source} | ${date}`}</p>
+            <h3 className='feature-event-title'>{title[0]}</h3>
+            <div className='feature-avatar-container'>
+              { avatars.slice(0, -2) }
+              <p className='feature-event-comment-count'
+                style={divStyle}
+              >{`${comments.length} Comments`}
+              </p>
+            </div>  
+          </NavLink>
+          <ul className="surge-container-event">
+            <label className={`feature-surge ${surge ===100 ? 'surged' : ''}`}
+            >{`${surge === 100 ? 'Surged' : `${surge}% Surged`} /// ${attending} Followers`}
+            </label>
+            <li>
+              <span className="progressbar-event progressblue-event" id={`surge-${randomStyle}`}></span>
+            </li>
+          </ul>
       </div>
       <div className='event-container'>
         { events }
