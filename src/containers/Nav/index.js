@@ -26,6 +26,10 @@ export class Nav extends Component {
     }
   }
 
+  componentDidMount() {
+    this.toggleAdd();
+  }
+
   toggleAdd = () => {
     this.setState( {
       addTopic: !this.state.addTopic,
@@ -35,11 +39,7 @@ export class Nav extends Component {
   }
 
   showFavorites = () => {
-    const { favorites } = this.props.user;
-
-    
-    this.setState( { showFavorites: !this.state.showFavorites} )
-    
+    this.setState( { showFavorites: !this.state.showFavorites} ) 
   }
 
   handleChange = (event) => {
@@ -73,8 +73,6 @@ export class Nav extends Component {
 
     let displayTopics = [];
     let favoriteArticles = [];
-
-    
 
     if (user.topics) {
       displayTopics = user.topics.map(topic => (
@@ -137,10 +135,10 @@ export class Nav extends Component {
             >
               <input autoFocus className='search'
                 value={search}
-                placeholder='enter topic'
+                placeholder='enter a topic'
                 style={ search.length 
                   ? {width: `${(search.length * 10) + 15}px`}
-                  : {width: `105px`}}
+                  : {width: `123px`}}
                 onChange={this.handleChange}
               />
             </form>
@@ -176,7 +174,6 @@ export class Nav extends Component {
               <ul className='favorites-container'>
                 { favoriteArticles }
               </ul>
-
             </div>  
           </div>
         }

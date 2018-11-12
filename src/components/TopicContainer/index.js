@@ -63,25 +63,25 @@ export const TopicContainer = ( { content } ) => {
         style={{backgroundImage: `url(${image})`}}
       >
         <div className='event-screen'></div>
-          <NavLink className='event-link' to={`/${id}`}>
-            <p className='feature-source'>{`${source} | ${date}`}</p>
-            <h3 className='feature-event-title'>{title[0]}</h3>
-            <div className='feature-avatar-container'>
-              { avatars.slice(0, -2) }
-              <p className='feature-event-comment-count'
-                style={divStyle}
-              >{`${comments.length} Comments`}
-              </p>
-            </div>  
-          </NavLink>
-          <ul className="surge-container-event">
-            <label className={`feature-surge ${surge ===100 ? 'surged' : ''}`}
-            >{`${surge === 100 ? 'Surged' : `${surge}% Surged`} /// ${attending} Followers`}
-            </label>
-            <li>
-              <span className="progressbar-event progressblue-event" id={`surge-${randomStyle}`}></span>
-            </li>
-          </ul>
+        <NavLink className='event-link' to={`/${id}`}>
+          <p className='feature-source'>{`${source} - ${date}`}</p>
+          <h3 className='feature-event-title'>{title[0]}</h3>
+          <div className='feature-avatar-container'>
+            { avatars.slice(0, -2) }
+            <p className='feature-event-comment-count'
+              style={divStyle}
+            >{`${comments.length} Comments`}
+            </p>
+          </div>  
+        </NavLink>
+        <ul className="surge-container-event">
+          <label className={`feature-surge ${surge ===100 ? 'surged' : ''}`}
+          >{`${surge === 100 ? 'Surged' : `${surge}% Surged`} /// ${attending} Followers`}
+          </label>
+          <li>
+            <span className="progressbar-event progressblue-event" id={`surge-${randomStyle}`}></span>
+          </li>
+        </ul>
       </div>
       <div className='event-container'>
         { events }

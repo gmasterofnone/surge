@@ -20,7 +20,7 @@
   font-size: .75rem;
   color: rgba(255, 255, 255, 0.886);
   text-transform: uppercase;
-  margin-left: 37px;
+  margin-left: 47px;
   position: relative;
   z-index: 1005;
   margin-bottom: 15px;
@@ -37,7 +37,7 @@
   width: 70%;
   position: relative;
   z-index: 1005;
-  margin-left: 30px;
+  margin-left: 40px;
 }
 
 .feature-avatar-container {
@@ -45,7 +45,7 @@
   align-content: center;
   position: relative;
   z-index: 1005;
-  margin: 20px 0 60px 32px;
+  margin: 20px 0 60px 42px;
 }
 
 .feature-avatar-tiles {
@@ -62,7 +62,7 @@
 }
 
 .feature-surge {
-  margin-left: 10px !important;
+  margin-left: 20px !important;
 }
 
 .event-container {
@@ -72,7 +72,7 @@
   grid-column-gap: 30px;
   grid-row-gap: 30px;
   grid-template-columns: repeat(auto-fit, minmax(525px, 1fr));
-  margin: 0 30px 30px 30px;
+  margin: 0 40px 30px 40px;
   padding: 40px 0 40px 0;
 }
 

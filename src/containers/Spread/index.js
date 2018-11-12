@@ -14,10 +14,6 @@ export const Spread = ( { content } ) => {
   return(
     <div className='Spread'>
       { layouts }
-      {
-        !Object.keys(content).length &&
-        <h1 className='add-a-topic'>...add a topic you care about above</h1>
-      }
     </div>
   )
 }
