@@ -1,5 +1,6 @@
 import { newsKey, googleKey, ipKey } from './API_keys'
 import { fetchRequest, fetchUsers } from './API.js'
+import { mockUsers } from './mockUsers'
 
 
 let uuidv4 = require("uuid/v4");
@@ -65,9 +66,9 @@ export const fetchNews = async topic => {
   })
 }
 
-const addUsers = async (topics) => {
+const addUsers = (topics) => {
   const url = 'https://randomuser.me/api/1.1/?results=1000'
-  const response = await fetchUsers(url)
+  const response = mockUsers;
 
   const users =  response.results.map(user => {
     let fName, lName;

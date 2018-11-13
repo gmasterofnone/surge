@@ -8,8 +8,10 @@ import { toggleFavorite } from '../../actions/index';
 import addTrue from '../../assets/add-true.svg'
 import addFalse from '../../assets/add-false.svg'
 import share from '../../assets/share.svg'
+import { avatar } from '../../assets/'
 
 
+ 
 
 import './EventPage.css'
 
@@ -36,8 +38,9 @@ export class EventPage extends Component {
   }
 
   render() {
-    const { title, image, body, surge, attending, favorite } = this.props.event;
-    const article = this.props.event;
+    const { title, image, body, surge, attending, favorite, source, date, link, author, event } = this.props.event;
+    const { user } = this.props;
+    console.log(user)
     let uuidv4 = require("uuid/v4");
 
     let randomStyle = randomNumber(0, 20000)
@@ -78,55 +81,54 @@ export class EventPage extends Component {
           <div className='eventpage-image'
               style={{backgroundImage: `url(${image})`}}
           >
-           {
-            favorite &&
-          <div className='event-favorite-container'
-            style={{opacity: `1`}}
-          >
-            <img className='fav-btn' 
-              src={addTrue} 
-              alt='favorite button'
-              onClick={() => toggleFavorite(article)}
-            />
-          </div>
-          }
-          {
-            !favorite &&
-          <div className='event-favorite-container'>
-            <img className='fav-btn' 
-              src={favorite ? addTrue : addFalse} 
-              alt='favorite button'
-              onClick={() => toggleFavorite(article)}
-            />
-            <img className='share-btn' src={share} alt='share button'/>
-          </div>
-          }
-          </div>
-          <div>
-            <h1 className='eventpage-title'>{title[0]}</h1>
-            <p className='eventpage-body'>{body}...</p>
-          </div>   
-          <div className='eventpage-interaction'>
-            <ul className="surge-container-eventpage">
-              <label>{`Surge | ${attending} Followers`}</label>
+            <ul className="surge-container-event">
+              <label className={surge ===100 ? 'surged' : ''}
+              >{`${surge === 100 ? 'Surged' : `${surge}% Surged`} /// ${attending} Followers`}
+              </label>
               <li>
                 <span className="progressbar-event progressblue-event" id={`surge-${randomStyle}`}></span>
               </li>
             </ul>
           </div>
-          <p className='comments-tag'>Comments</p>
+          <div>
+            <p className='eventpage-source'>{`${source} - ${date}`}</p>
+            <h1 className='eventpage-title'>{title[0]}</h1>
+            <p className='eventpage-author'>{author}</p>
+            <p className='eventpage-body'
+            >{body}
+              <a target='blank' href={link}>view original article.</a>
+            </p>
+          </div>   
+          <p className='comments-tag'>Recent Comments</p>
           <ul className='user-comments-section'>
             {userComments}
           </ul>
-          <form className='add-comment'></form>
+          <form className='add-comment'>
+            <div className='add-comment-photo'>
+              <img className='user-comments-avatar' src={avatar[user.avatar]}/>
+              <p className='add-photo'>add photo</p>
+            </div>
+            <div className='comment-input'>
+              <input className='name-input'  
+                placeholder='Enter name'
+              />
+              <input className='comment-input' 
+                placeholder='Join the discussion and add a comment..'
+              />
+            </div>
+          </form>
         </div>
       </div>
     )
   }
 }
 
+export const mapStateToProps = (state) => ({
+  user: state.user,
+})
+
 export const mapDispatchToProps = (dispatch) => ({
   toggleFavorite: (article) => dispatch(toggleFavorite(article))
 })
 
-export default connect(null, mapDispatchToProps)(EventPage)
+export default connect(mapStateToProps, mapDispatchToProps)(EventPage)

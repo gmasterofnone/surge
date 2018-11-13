@@ -14,6 +14,7 @@ export const fetchUsers = async url => {
     const response = await fetch(url);
     return await response.json();
   } catch(error) {
+    console.log('this')
     return mockUsers;
   }
 }
