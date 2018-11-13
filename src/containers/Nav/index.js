@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { getTopic } from '../../thunks/getTopic';
 import { removeTopic, toggleFavorite, deleteUser } from '../../actions'
 import {randomNumber } from '../../utils/Helper'
@@ -84,13 +84,15 @@ export class Nav extends Component {
       )) 
       favoriteArticles = user.favorites.map(favorite => (
         <li key={uuidv4()} className='fav-list'>
-          <img className='fav-article-img' 
-            src={favorite.image}
-            alt='favorite article'
-          />
+          <NavLink className='event-link' to={`/${favorite.id}`}>
+            <img className='fav-article-img' 
+              src={favorite.image}
+              alt='favorite article'
+            />
+          </NavLink>
           <div>
             <h3 
-              className='fav-title'>{favorite.title[0].slice(0, 30).toUpperCase()}...
+              className='fav-title'>{favorite.title[0].slice(0, 50).toUpperCase()}...
             </h3>
             <p 
               className='fav-delete'
