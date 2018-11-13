@@ -7,7 +7,6 @@ import { toggleFavorite } from '../../actions/index';
 
 import addTrue from '../../assets/add-true.svg'
 import addFalse from '../../assets/add-false.svg'
-import share from '../../assets/share.svg'
 import { avatar } from '../../assets/'
 
 
@@ -80,6 +79,11 @@ export class EventPage extends Component {
           <div className='eventpage-image'
               style={{backgroundImage: `url(${image})`}}
           >
+            <img className={`eventpage-toggle-favorites ${favorite ? 'eventpage-fav-active' : ''}`}
+              src={favorite ? addTrue : addFalse}
+              alt='toggle favorite'
+              onClick={() => this.props.toggleFavorite(this.props.event)}
+            />
             <ul className="surge-container-event">
               <label className={surge ===100 ? 'surged' : ''}
               >{`${surge === 100 ? 'Surged' : `${surge}% Surged`} /// ${attending} Followers`}
@@ -103,7 +107,7 @@ export class EventPage extends Component {
             <div>
               <p className='surge-tag'>This Headline has Surged!</p>
               <div className='surge-event'>
-                <img className='surge-map' src={event.map}/>
+                <img className='surge-map' src={event.map} alt='event map'/>
                 <div className='surge-map-details'>
                   <div>
                     <h3 className='meetup'>Meetup:</h3>
@@ -123,7 +127,7 @@ export class EventPage extends Component {
           </ul>
           <form className='add-comment'>
             <div className='add-comment-photo'>
-              <img className='user-comments-avatar' src={avatar[user.avatar]}/>
+              <img className='user-comments-avatar' src={avatar[user.avatar]} alt='user avatar'/>
               <p className='add-photo'>add photo</p>
             </div>
             <div className='comment-input'>

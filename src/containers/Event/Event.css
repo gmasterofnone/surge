@@ -23,6 +23,25 @@
   position: relative;
 }
 
+.event-toggle-favorites {
+  cursor: pointer;
+  display: none;
+  height: 40px;
+  position: absolute;
+  z-index: 1100;
+  bottom: 86%;
+  left: 91%;
+  opacity: .8;
+}
+
+.event-image:hover .event-toggle-favorites {
+  display: unset;
+}
+
+.event-fav-active {
+  display: unset;
+}
+
 .event-screen {
   position: absolute;
   width: 100%;

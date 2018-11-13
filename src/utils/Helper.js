@@ -20,6 +20,7 @@ export const buildNews =  async (topic) => {
   const users = await addUsers(topics);
   const articles = addSocial(topics, users)
   const events = buildEvents(venues, articles)
+  console.log(events)
   return events;
 }
 
@@ -43,7 +44,7 @@ export const fetchNews = async topic => {
 
   return articles.map(story => {
     let surge
-    if (randomNumber(0, 4) === 0 ) {
+    if (randomNumber(0, 3) === 0 ) {
       surge = 100;
     } else {
       surge = randomNumber(23, 100)
@@ -129,7 +130,6 @@ export const buildEvents = (venues, articles) => {
         })
       }
       article.event = event;
-      console.log(article)  
     }
   })
   

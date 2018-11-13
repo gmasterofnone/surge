@@ -1,19 +1,25 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import './TopicContainer.css'
 import { NavLink } from 'react-router-dom';
 
 import EventCard from '../../containers/Event';
 import { randomNumber } from '../../utils/Helper';
+import { toggleFavorite } from '../../actions/index';
+
+import addTrue from '../../assets/add-true.svg'
+import addFalse from '../../assets/add-false.svg'
+
 let uuidv4 = require("uuid/v4");
 
-export const TopicContainer = ( { content } ) => {
+export const TopicContainer = ( { content, toggleFavorite } ) => {
   const feature = content[0]
   const childEvents = content.filter(event => event.title !== feature.title)
   const events = childEvents.map(event => (
     <EventCard key={uuidv4()} event={event} /> 
   ))
 
-  const { source, title, image, date,comments, id, surge, attending } = feature;
+  const { source, title, image, date,comments, id, surge, attending, favorite } = feature;
   
   let randomStyle = randomNumber(0, 20000)
   
@@ -62,6 +68,11 @@ export const TopicContainer = ( { content } ) => {
         className='feature-event'
         style={{backgroundImage: `url(${image})`}}
       >
+        <img className={`feature-toggle-favorites ${favorite ? 'fav-active' : ''}`}
+          src={favorite ? addTrue : addFalse}
+          alt='toggle favorite'
+          onClick={() => toggleFavorite(feature)}
+        />
         <div className='event-screen'></div>
         <NavLink className='event-link' to={`/${id}`}>
           <p className='feature-source'>{`${source} - ${date}`}</p>
@@ -90,6 +101,11 @@ export const TopicContainer = ( { content } ) => {
   )
 }
 
+export const mapDispatchToProps = (dispatch) => ({
+  toggleFavorite: (article) => dispatch(toggleFavorite(article))
+})
+
+export default connect(null, mapDispatchToProps)(TopicContainer)
 
 
-export default TopicContainer;
+

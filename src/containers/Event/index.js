@@ -6,13 +6,13 @@ import { toggleFavorite } from '../../actions/index';
 
 import addTrue from '../../assets/add-true.svg'
 import addFalse from '../../assets/add-false.svg'
-import share from '../../assets/share.svg'
+
 
 
 
 import './Event.css'
 
-export const EventCard = ( { event } ) => {
+export const EventCard = ( { event, toggleFavorite } ) => {
   const { title, image, comments, surge, attending, id, favorite } = event;
   let uuidv4 = require("uuid/v4");
   let randomStyle = randomNumber(0, 20000)
@@ -60,6 +60,11 @@ export const EventCard = ( { event } ) => {
         <div className='event-image'
           style={{backgroundImage: `url(${image})`}}
         >
+          <img className={`event-toggle-favorites ${favorite ? 'event-fav-active' : ''}`}
+            src={favorite ? addTrue : addFalse}
+            alt='toggle favorite'
+            onClick={() => toggleFavorite(event)}
+          />
           <div className='event-screen'></div>
           <NavLink className='event-link' to={`/${id}`}>
             <h3 className='event-title'>{title[0]}</h3>

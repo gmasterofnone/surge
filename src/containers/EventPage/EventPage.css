@@ -50,6 +50,26 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  position: relative;
+}
+
+.eventpage-toggle-favorites {
+  cursor: pointer;
+  display: none;
+  height: 40px;
+  position: absolute;
+  z-index: 1100;
+  bottom: 86%;
+  left: 91%;
+  opacity: .8;
+}
+
+.eventpage-image:hover .eventpage-toggle-favorites {
+  display: unset;
+}
+
+.eventpage-fav-active {
+  display: unset;
 }
 
 .article-detail {
@@ -80,10 +100,11 @@
 
 .eventpage-body {
   margin: 0 0 40px 0;
+  line-height: 140%;
 }
 
 .article-link {
-  color: #41ead4;
+  color: black;
 }
 
 .surge-tag {

@@ -93,6 +93,10 @@ header img {
   font-weight: 600;
 }
 
+.search::-webkit-input-placeholder {
+  color: lightgray;
+}
+
 .search:focus {
   outline: none;
 }
