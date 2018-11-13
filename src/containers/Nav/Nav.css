@@ -1,6 +1,6 @@
 header {
   display: flex;
-  margin: 40px 0 40px 50px;
+  margin: 30px 0 30px 50px;
   align-items: flex-end;
 }
 
@@ -91,6 +91,10 @@ header img {
   border: none;
   caret-color: #ff0022;
   font-weight: 600;
+}
+
+.search::-webkit-input-placeholder {
+  color: lightgray;
 }
 
 .search:focus {

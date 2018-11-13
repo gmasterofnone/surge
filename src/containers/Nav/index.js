@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { getTopic } from '../../thunks/getTopic';
 import { removeTopic, toggleFavorite, deleteUser } from '../../actions'
 import {randomNumber } from '../../utils/Helper'
@@ -26,6 +26,10 @@ export class Nav extends Component {
     }
   }
 
+  componentDidMount() {
+    this.toggleAdd();
+  }
+
   toggleAdd = () => {
     this.setState( {
       addTopic: !this.state.addTopic,
@@ -35,11 +39,7 @@ export class Nav extends Component {
   }
 
   showFavorites = () => {
-    const { favorites } = this.props.user;
-
-    
-    this.setState( { showFavorites: !this.state.showFavorites} )
-    
+    this.setState( { showFavorites: !this.state.showFavorites} ) 
   }
 
   handleChange = (event) => {
@@ -74,8 +74,6 @@ export class Nav extends Component {
     let displayTopics = [];
     let favoriteArticles = [];
 
-    
-
     if (user.topics) {
       displayTopics = user.topics.map(topic => (
           <span className={`${topic} search-topics`}
@@ -86,13 +84,15 @@ export class Nav extends Component {
       )) 
       favoriteArticles = user.favorites.map(favorite => (
         <li key={uuidv4()} className='fav-list'>
-          <img className='fav-article-img' 
-            src={favorite.image}
-            alt='favorite article'
-          />
+          <NavLink className='event-link' to={`/${favorite.id}`}>
+            <img className='fav-article-img' 
+              src={favorite.image}
+              alt='favorite article'
+            />
+          </NavLink>
           <div>
             <h3 
-              className='fav-title'>{favorite.title[0].slice(0, 30).toUpperCase()}...
+              className='fav-title'>{favorite.title[0].slice(0, 50).toUpperCase()}...
             </h3>
             <p 
               className='fav-delete'
@@ -137,10 +137,10 @@ export class Nav extends Component {
             >
               <input autoFocus className='search'
                 value={search}
-                placeholder='enter topic'
+                placeholder='enter a topic'
                 style={ search.length 
                   ? {width: `${(search.length * 10) + 15}px`}
-                  : {width: `105px`}}
+                  : {width: `123px`}}
                 onChange={this.handleChange}
               />
             </form>
@@ -176,7 +176,6 @@ export class Nav extends Component {
               <ul className='favorites-container'>
                 { favoriteArticles }
               </ul>
-
             </div>  
           </div>
         }
