@@ -40,7 +40,6 @@ export class EventPage extends Component {
   render() {
     const { title, image, body, surge, attending, favorite, source, date, link, author, event } = this.props.event;
     const { user } = this.props;
-    console.log(user)
     let uuidv4 = require("uuid/v4");
 
     let randomStyle = randomNumber(0, 20000)
@@ -90,15 +89,34 @@ export class EventPage extends Component {
               </li>
             </ul>
           </div>
-          <div>
+          <div className='article-detail'>
             <p className='eventpage-source'>{`${source} - ${date}`}</p>
             <h1 className='eventpage-title'>{title[0]}</h1>
-            <p className='eventpage-author'>{author}</p>
+            <p className='eventpage-author'>{`by ${author}`}</p>
             <p className='eventpage-body'
             >{body}
-              <a target='blank' href={link}>view original article.</a>
+              <a className='article-link' target='blank' href={link}>view original article.</a>
             </p>
-          </div>   
+          </div>
+          {
+            surge === 100 &&
+            <div>
+              <p className='surge-tag'>This Headline has Surged!</p>
+              <div className='surge-event'>
+                <img className='surge-map' src={event.map}/>
+                <div className='surge-map-details'>
+                  <div>
+                    <h3 className='meetup'>Meetup:</h3>
+                  </div>
+                  <div>
+                    <h3 className='surge-event-date'>{event.date}</h3>
+                    <p className='surge-event-name'>{event.name}</p>
+                    <p className='surge-event-address'>{event.address}</p>
+                  </div>
+                </div>
+              </div>  
+            </div>
+          }
           <p className='comments-tag'>Recent Comments</p>
           <ul className='user-comments-section'>
             {userComments}
@@ -113,7 +131,7 @@ export class EventPage extends Component {
                 placeholder='Enter name'
               />
               <input className='comment-input' 
-                placeholder='Join the discussion and add a comment..'
+                placeholder='Click here to join the discussion and add a comment..'
               />
             </div>
           </form>

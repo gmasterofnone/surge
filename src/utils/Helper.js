@@ -14,13 +14,13 @@ export const storeUser = user => {
 }
 
 export const buildNews =  async (topic) => {
-  // const location = await getUserLocation();
-  // const venues = await getLocalVenues(location);
+  const location = await getUserLocation();
+  const venues = await getLocalVenues(location);
   const topics = await fetchNews(topic);
   const users = await addUsers(topics);
   const articles = addSocial(topics, users)
-  // const events = buildEvents(venues, articles)
-  return articles;
+  const events = buildEvents(venues, articles)
+  return events;
 }
 
 export const getUserLocation = async () => {
@@ -67,7 +67,7 @@ export const fetchNews = async topic => {
 }
 
 const addUsers = (topics) => {
-  const url = 'https://randomuser.me/api/1.1/?results=1000'
+  // const url = 'https://randomuser.me/api/1.1/?results=1000'
   const response = mockUsers;
 
   const users =  response.results.map(user => {
@@ -90,8 +90,8 @@ const addUsers = (topics) => {
 export const addSocial = (topics, users) => {
   topics.forEach(article => {
     article.comments = [];
-    let eventComments = 2;
-    while (eventComments < article.surge / randomNumber(3, 5)) {
+    let eventComments = 0;
+    while (eventComments < article.surge / randomNumber(7, 10)) {
       article.comments.push(users[randomNumber(0, users.length - 1)])
       eventComments++
     }
@@ -104,7 +104,7 @@ export const buildEvents = (venues, articles) => {
     if (article.surge === 100) {
       const randomVenue = venues[randomNumber(0, venues.length)]
       const { lat, lng } = randomVenue.geometry.location;
-      const map = `http://maps.googleapis.com/maps/api/staticmap?&size=600x300&style=visibility:on
+      const map = `http://maps.googleapis.com/maps/api/staticmap?size=600x300&style=visibility:on
         &style=feature:water%7Celement:geometry%7Cvisibility:on
         &style=feature:landscape%7Celement:geometry%7Cvisibility:on
         &markers=icon:https://www.dropbox.com/s/vp2bfkh2wb1237b/surge.png?raw=1%7C${lat},${lng}
@@ -114,17 +114,25 @@ export const buildEvents = (venues, articles) => {
       let date = new Date();
       date.setDate((date.getDate() + randomNumber(1, 14)));
       date.setHours(((date.getHours() - randomNumber(1, 5))))
+      date.setMinutes(0)
+      date.setSeconds(0)
 
       const event = {
         map,
         name: randomVenue.name,
         address: randomVenue.vicinity,
-        date: date.toLocaleString()
+        date: date.toLocaleString([], {
+          month: 'long', 
+          day: '2-digit', 
+          hour: '2-digit', 
+          minute:'2-digit'
+        })
       }
-      article.event = event;  
-      console.log(article)
+      article.event = event;
+      console.log(article)  
     }
   })
+  
   return articles;
 }
 
