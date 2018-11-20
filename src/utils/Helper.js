@@ -20,6 +20,7 @@ export const buildNews =  async (topic) => {
   const users = await addUsers(topics);
   const articles = addSocial(topics, users)
   const events = buildEvents(venues, articles)
+  console.log(events)
   return events;
 }
 
