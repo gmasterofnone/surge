@@ -10,6 +10,10 @@ The concept I came up with is a sort of mash-up of Flipboard and Pinterest: User
 * User can see a list of articles they follow.
 * Users can see local meetups with others who follow and share interests in the same issues.
 
+## Demo
+[![Surge Demo](https://img.youtube.com/vi/dT7V3320x9I/0.jpg)](https://www.youtube.com/watch?v=dT7V3320x9I)
+
+
 
 ## Set Up
 
