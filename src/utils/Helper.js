@@ -18,9 +18,8 @@ export const buildNews =  async (topic) => {
   const venues = await getLocalVenues(location);
   const topics = await fetchNews(topic);
   const users = await addUsers(topics);
-  const articles = addSocial(topics, users)
-  const events = buildEvents(venues, articles)
-  console.log(events)
+  const articles = addSocial(topics, users);
+  const events = buildEvents(venues, articles);
   return events;
 }
 
